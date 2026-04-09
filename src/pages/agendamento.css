@@ -1,0 +1,197 @@
+/* ===== BASE ===== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ===== HEADER ===== */
+.topbar {
+    background: #1f4568;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+/* LOGO AJUSTADA 🔥 */
+.logo-area img {
+    height: 45px;
+    width: auto;
+}
+
+/* USER */
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.user-info .name {
+    font-weight: bold;
+}
+
+.user-info .role {
+    color: #ddd;
+}
+
+.user-area i {
+    cursor: pointer;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: white;
+    padding: 25px;
+    width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* SUBTÍTULO */
+.subtitle {
+    color: gray;
+    margin-bottom: 20px;
+}
+
+/* ===== FORM ===== */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+select, input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* LINHA */
+.linha {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.campo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* MOTIVO */
+.motivo {
+    margin-top: 20px;
+}
+
+textarea {
+    height: 100px;
+}
+
+/* ===== BOTÕES ===== */
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cancelar {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.confirmar {
+    background: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* ===== VOLTAR ===== */
+.voltar-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    color: #000;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.voltar i {
+    margin-right: 6px;
+}
+
+/* ===== 🔥 NOVO: DIAS E HORÁRIOS ===== */
+#dias, #horarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* BOTÕES DE DATA/HORA */
+#dias button, #horarios button {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    background: #e0e0e0;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* HOVER */
+#dias button:hover,
+#horarios button:hover {
+    background: #4da6ff;
+    color: white;
+}
+
+/* SELECIONADO 🔥 */
+.selecionado {
+    background: #1f4568 !important;
+    color: white;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 800px) {
+    .linha {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 90%;
+    }
+}

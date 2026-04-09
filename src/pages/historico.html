@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Agende+ - Histórico</title>
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="historico.css">
+</head>
+<body>
+
+<header class="topo">
+
+  <div class="logo">
+            <img src="file:///C:/Users/21620230039/OneDrive%20-%20MARISTA%20BRASIL/Imagens/Capturas%20de%20tela/Captura%20de%20tela%202026-02-23%20083349.png" alt="Logo">
+  </div>
+
+  <h1>Marista Escola Social Cascavel</h1>
+
+  <!-- ✅ NOVO HEADER IGUAL AO INÍCIO -->
+  <div class="user-area">
+    <i class="fa-solid fa-bell"></i>
+
+    <div class="user-info">
+      <span class="name" id="nomeUsuario"></span>
+      <span class="role" id="tipoUsuario"></span>
+    </div>
+
+    <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
+  </div>
+
+</header>
+
+<main class="container">
+
+  <!-- BOTÃO VOLTAR -->
+  <a href="inicio.html" class="voltar">← Voltar para o Início</a>
+
+  <h2>Histórico de Agendamentos</h2>
+  <p class="sub">Veja seus agendamentos anteriores.</p>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <span>Filtrar por status:</span>
+    <div class="botoes">
+      <button class="ativo">Todos</button>
+      <button>Aguardando</button>
+      <button>Confirmados</button>
+      <button>Realizados</button>
+      <button>Recusados</button>
+      <button>Cancelados</button>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards">
+
+    <div class="card aguardando">
+      <h3>Erica Fernanda</h3>
+      <p>18/06/26 - 12:15</p>
+      <span class="status">Aguardando</span>
+      <p class="desc">Falar sobre notas</p>
+    </div>
+
+    <div class="card confirmados">
+      <h3>Flávia Passala</h3>
+      <p>20/06/26 - 14:30</p>
+      <span class="status">Confirmado</span>
+      <p class="desc">Dificuldades em casa que estão afetando os estudos</p>
+    </div>
+
+    <div class="card realizados">
+      <h3>Eduardo Nikodem</h3>
+      <p>20/06/26 - 09:10</p>
+      <span class="status">Realizado</span>
+      <p class="desc">Problemas com matrícula</p>
+    </div>
+
+    <div class="card recusados">
+      <h3>Ivan Gomes Veiga</h3>
+      <p>17/06/26 - 16:40</p>
+      <span class="status">Recusado</span>
+      <p class="desc">Queda no desempenho escolar</p>
+    </div>
+
+    <div class="card cancelados">
+      <h3>Thayla Magally Gevher</h3>
+      <p>19/06/26 - 10:35</p>
+      <span class="status">Cancelado</span>
+      <p class="desc">Falar sobre minhas notas</p>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Marista Escola Social Cascavel - Agende+
+</footer>
+
+<script src="historico.jsx"></script>
+
+<!-- ✅ SCRIPT DO USUÁRIO -->
+<script>
+const dados = JSON.parse(localStorage.getItem("usuario"));
+
+const nome = document.getElementById("nomeUsuario");
+const tipo = document.getElementById("tipoUsuario");
+
+/* VERIFICA LOGIN */
+if (!dados) {
+    window.location.href = "login.html";
+} else {
+    nome.textContent = dados.nome;
+
+    if (dados.tipo === "profissional") {
+        tipo.textContent = dados.cargo;
+    } else if (dados.tipo === "aluno") {
+        tipo.textContent = "Aluno";
+    } else {
+        tipo.textContent = "Responsável";
+    }
+}
+
+/* LOGOUT */
+document.querySelector(".logout").addEventListener("click", () => {
+    localStorage.removeItem("usuario");
+    window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

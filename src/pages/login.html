@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<form id="formLogin">
+    <div class="container">
+        <div class="login-box">
+            <h1>Entrar</h1>
+            <p class="subtitle">Acesse sua conta</p>
+            
+            <div class="user-type">
+                <span>Tipo de Usuário</span>
+                <div class="buttons">
+                    <button type="button" class="user-btn active aluno" data-type="aluno">
+                        <i class="fa-solid fa-user"></i>
+                        Aluno
+                    </button>
+                    <button type="button" class="user-btn" data-type="responsavel">
+                        <i class="fa-solid fa-users"></i>
+                        Responsável
+                    </button>
+                    <button type="button" class="user-btn" data-type="profissional">
+                        <i class="fa-solid fa-briefcase"></i>
+                        Profissional
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>E-mail</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="seu@maristabrasil" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Senha</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="senha" name="senha" placeholder="*****" required>
+                </div>
+            </div>
+
+            <button class="login-btn" type="submit">Entrar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Overlay de carregamento -->
+<div id="loadingScreen" style="display:none;">
+    <div class="spinner"></div>
+    <p>Acessando o site...</p>
+</div>
+
+<style>
+/* OVERLAY */
+#loadingScreen {
+    display: none; /* invisível até login */
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:#fff;
+    font-size:20px;
+}
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4a90e2;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* BOTÕES */
+.user-btn { padding:8px 12px; margin:2px; border:none; border-radius:6px; cursor:pointer; }
+.user-btn.active.aluno { background:#4a90e2; color:#fff; }
+.user-btn.active.responsavel { background:#8423C5; color:#fff; }
+.user-btn.active.profissional { background:#133B64; color:#fff; }
+</style>
+
+<script src="login.jsx"></script>
+</body>
+</html>
