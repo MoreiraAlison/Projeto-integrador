@@ -10,6 +10,7 @@ function Solicitacao() {
 
   useEffect(() => {
     const dados = JSON.parse(localStorage.getItem("usuario"));
+
     if (!dados) {
       navigate("/login");
     } else {
@@ -17,6 +18,7 @@ function Solicitacao() {
     }
 
     const agend = JSON.parse(localStorage.getItem("agendamento"));
+
     if (!agend) {
       navigate("/agendamento");
     } else {
@@ -37,10 +39,18 @@ function Solicitacao() {
 
   const formatarData = (data) => {
     if (!data) return "-";
+
     try {
       const dataObj = new Date(data);
-      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      return dataObj.toLocaleDateString('pt-BR', opcoes);
+
+      const opcoes = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+
+      return dataObj.toLocaleDateString("pt-BR", opcoes);
     } catch {
       return data;
     }
@@ -48,11 +58,16 @@ function Solicitacao() {
 
   const formatarHora = (hora) => {
     if (!hora) return "-";
+
     try {
       const [h, m] = hora.split(":");
+
       let horaInt = parseInt(h, 10);
+
       const ampm = horaInt >= 12 ? "PM" : "AM";
+
       horaInt = horaInt % 12 || 12;
+
       return `${horaInt}:${m} ${ampm}`;
     } catch {
       return hora;
@@ -64,37 +79,52 @@ function Solicitacao() {
   }
 
   return (
-    <Layout 
-      usuario={usuario} 
+    <Layout
+      usuario={usuario}
       onLogout={handleLogout}
       onNotifications={handleNotifications}
     >
       <div className="solicitacao-content">
+
         <div className="icon-check">
           <i className="fa-solid fa-circle-check"></i>
         </div>
 
-        <h2>Solicitação Enviada!</h2>
+        <h2>
+          {usuario.tipo === "profissional"
+            ? "Solicitação Respondida!"
+            : "Solicitação Enviada!"}
+        </h2>
+
         <p className="subtitulo">
-          Sua solicitação de agendamento foi enviada. Aguarde a confirmação do profissional.
+          {usuario.tipo === "profissional"
+            ? "A resposta da solicitação foi enviada com sucesso."
+            : "Sua solicitação de agendamento foi enviada. Aguarde a confirmação do profissional."}
         </p>
 
         <div className="card-detalhes">
-          <div className="titulo-card">Detalhes do agendamento</div>
+
+          <div className="titulo-card">
+            {usuario.tipo === "profissional"
+              ? "Detalhes da solicitação"
+              : "Detalhes do agendamento"}
+          </div>
 
           <div className="detalhe">
             <i className="fa-solid fa-user"></i>
+
             <div>
               <strong>Profissional</strong>
               <br />
               <span>{agendamento.profissional || "-"}</span>
               <br />
-              <small>{"-"}</small>
+              <small>-</small>
             </div>
           </div>
 
           <div className="detalhe">
             <i className="fa-solid fa-calendar"></i>
+
             <div>
               <strong>Data</strong>
               <br />
@@ -104,6 +134,7 @@ function Solicitacao() {
 
           <div className="detalhe">
             <i className="fa-solid fa-clock"></i>
+
             <div>
               <strong>Hora</strong>
               <br />
@@ -113,6 +144,7 @@ function Solicitacao() {
 
           <div className="detalhe">
             <i className="fa-solid fa-clipboard"></i>
+
             <div>
               <strong>Motivo</strong>
               <br />
@@ -122,13 +154,21 @@ function Solicitacao() {
         </div>
 
         <div className="botoes">
-          <button className="btn-voltar" onClick={() => navigate("/inicio")}>
+          <button
+            className="btn-voltar"
+            onClick={() => navigate("/inicio")}
+          >
             Voltar ao Início
           </button>
-          <button className="btn-agendamentos" onClick={() => navigate("/historico")}>
+
+          <button
+            className="btn-agendamentos"
+            onClick={() => navigate("/historico")}
+          >
             Ver Agendamentos
           </button>
         </div>
+
       </div>
     </Layout>
   );

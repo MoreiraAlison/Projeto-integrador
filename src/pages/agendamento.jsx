@@ -24,10 +24,13 @@ function Agendamento() {
   const [motivo, setMotivo] = useState("");
   const [dias, setDias] = useState([]);
   const [horarios, setHorarios] = useState([]);
+  const [mostrarModal, setMostrarModal] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const dados = JSON.parse(localStorage.getItem("usuario"));
+
     if (!dados) {
       navigate("/login");
     } else {
@@ -38,21 +41,28 @@ function Agendamento() {
   const gerarSemana = () => {
     const hoje = new Date();
     const semana = [];
+
     for (let i = 0; i < 7; i++) {
       const dia = new Date();
       dia.setDate(hoje.getDate() - hoje.getDay() + i);
       semana.push(dia);
     }
+
     return semana;
   };
 
   const handleProfissionalChange = (index) => {
     if (index !== "") {
       const prof = profissionais[index];
+
       setProfissionalSelecionado(prof);
-      
+
       const semana = gerarSemana();
-      const diasDisponiveis = semana.filter(dia => prof.dias.includes(dia.getDay()));
+
+      const diasDisponiveis = semana.filter((dia) =>
+        prof.dias.includes(dia.getDay())
+      );
+
       setDias(diasDisponiveis);
     } else {
       setProfissionalSelecionado(null);
@@ -63,6 +73,7 @@ function Agendamento() {
 
   const handleDiaSelect = (dia) => {
     setDataSelecionada(dia);
+
     if (profissionalSelecionado) {
       setHorarios(profissionalSelecionado.horarios);
     }
@@ -82,7 +93,12 @@ function Agendamento() {
     };
 
     localStorage.setItem("agendamento", JSON.stringify(agendamento));
-    navigate("/solicitacao");
+
+    setMostrarModal(true);
+
+    setTimeout(() => {
+      navigate("/solicitacao");
+    }, 1800);
   };
 
   const handleLogout = () => {
@@ -101,25 +117,36 @@ function Agendamento() {
   }
 
   return (
-    <Layout 
-      usuario={usuario} 
+    <Layout
+      usuario={usuario}
       onLogout={handleLogout}
       onNotifications={handleNotifications}
     >
       <div className="agendamento-content">
+
         <div className="voltar-container">
-          <button className="voltar" onClick={() => navigate("/inicio")}>
-            <i className="fa-solid fa-arrow-left"></i> Voltar para o início
+          <button
+            className="voltar"
+            onClick={() => navigate("/inicio")}
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+            Voltar para o início
           </button>
         </div>
 
         <div className="card">
-          <h2>Criar Novo Atendimento</h2>
-          <p className="subtitle">Preencha as informações abaixo para agendar sua reunião</p>
+
+          <h2>Criar Novo Agendamento</h2>
+
+          <p className="subtitle">
+            Preencha as informações abaixo para agendar sua reunião
+          </p>
 
           <label>Selecione o profissional</label>
+
           <select onChange={(e) => handleProfissionalChange(e.target.value)}>
             <option value="">Selecione o profissional</option>
+
             {profissionais.map((prof, index) => (
               <option key={index} value={index}>
                 {prof.nome}
@@ -130,11 +157,16 @@ function Agendamento() {
           {dias.length > 0 && (
             <>
               <label>Escolha a data</label>
+
               <div className="dias-container">
                 {dias.map((dia, index) => (
                   <button
                     key={index}
-                    className={`dia-btn ${dataSelecionada?.getTime() === dia.getTime() ? "selected" : ""}`}
+                    className={`dia-btn ${
+                      dataSelecionada?.getTime() === dia.getTime()
+                        ? "selected"
+                        : ""
+                    }`}
                     onClick={() => handleDiaSelect(dia)}
                   >
                     {dia.toLocaleDateString("pt-BR")}
@@ -147,11 +179,14 @@ function Agendamento() {
           {horarios.length > 0 && (
             <>
               <label>Escolha o horário</label>
+
               <div className="horarios-container">
                 {horarios.map((hora, index) => (
                   <button
                     key={index}
-                    className={`hora-btn ${horaSelecionada === hora ? "selected" : ""}`}
+                    className={`hora-btn ${
+                      horaSelecionada === hora ? "selected" : ""
+                    }`}
                     onClick={() => setHoraSelecionada(hora)}
                   >
                     {hora}
@@ -163,6 +198,7 @@ function Agendamento() {
 
           <div className="campo motivo">
             <label>Motivo do agendamento</label>
+
             <textarea
               placeholder="Ex: conversar sobre minhas notas..."
               value={motivo}
@@ -171,14 +207,37 @@ function Agendamento() {
           </div>
 
           <div className="botoes">
-            <button className="cancelar" onClick={() => navigate("/inicio")}>
+            <button
+              className="cancelar"
+              onClick={() => navigate("/inicio")}
+            >
               Cancelar
             </button>
-            <button className="confirmar" onClick={handleConfirmar}>
+
+            <button
+              className="confirmar"
+              onClick={handleConfirmar}
+            >
               Confirmar
             </button>
           </div>
+
         </div>
+
+        {mostrarModal && (
+          <div className="modal-overlay">
+            <div className="modal-sucesso">
+              <i className="fa-solid fa-circle-check"></i>
+
+              <h3>Agendamento criado!</h3>
+
+              <p>
+                Seu agendamento foi enviado com sucesso.
+              </p>
+            </div>
+          </div>
+        )}
+
       </div>
     </Layout>
   );

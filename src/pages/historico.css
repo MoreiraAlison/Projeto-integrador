@@ -73,15 +73,16 @@ body {
 
 /* ===== CARDS ===== */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
 }
 
-.card {
+/* .card {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 15px;
+  border-radius: 14px;
+  width: 750px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   transition: 0.3s;
@@ -90,49 +91,52 @@ body {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 2px solid #f0f0f0;
 }
 
 .card-header h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
   color: #1f4568;
 }
 
 .status {
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
 }
 
 .card p {
-  margin: 8px 0;
+  margin: 7px 0;
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .card-footer {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   margin-top: 15px;
   padding-top: 10px;
   border-top: 1px solid #f0f0f0;
 }
 
 .btn-editar,
-.btn-cancelar {
+.btn-cancelar,
+.btn-confirmar,
+.btn-recusar {
   flex: 1;
-  padding: 8px 12px;
+  padding: 8px 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -140,6 +144,7 @@ body {
   transition: 0.2s;
 }
 
+/* ALUNO E RESPONSÁVEL */
 .btn-editar {
   background: #4da6ff;
   color: white;
@@ -158,9 +163,28 @@ body {
   background: #ddd;
 }
 
+/* PROFISSIONAL */
+.btn-confirmar {
+  background: #28a745;
+  color: white;
+}
+
+.btn-confirmar:hover {
+  background: #1f8a39;
+}
+
+.btn-recusar {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-recusar:hover {
+  background: #b52a37;
+}
+
 /* EMPTY STATE */
 .empty-state {
-  grid-column: 1 / -1;
+  width: 100%;
   text-align: center;
   padding: 60px 20px;
   color: #999;
@@ -184,7 +208,7 @@ body {
 /* ===== RESPONSIVO ===== */
 @media (max-width: 768px) {
   .cards {
-    grid-template-columns: 1fr;
+    justify-content: center;
   }
 
   .filtros {
@@ -197,110 +221,10 @@ body {
   }
 }
 
-/* NOME */
-.user-info .name {
-  font-weight: bold;
-  color: white;
-}
-
-/* TIPO */
-.user-info .role {
-  font-size: 12px;
-  color: #ddd;
-}
-
-/* LOGOUT */
-.logout {
-  cursor: pointer;
-  font-size: 18px;
-}
-
-/* ===== CONTEÚDO ===== */
-.container {
-  padding: 20px 40px;
-}
-
-/* VOLTAR */
-.voltar {
-  text-decoration: none;
-  color: #333;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-/* SUBTÍTULO */
-.sub {
-  color: gray;
-}
-
-/* ===== FILTROS ===== */
-.filtros {
-  background: #ddd;
-  padding: 15px;
-  border-radius: 10px;
-  margin: 20px 0;
-}
-
-.botoes button {
-  margin: 5px;
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  background: #eee;
-}
-
-/* BOTÃO ATIVO */
-.botoes .ativo {
-  background: #4da6ff;
-  color: white;
-}
-
-/* ===== CARDS ===== */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  width: 250px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-/* STATUS */
-.status {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border-radius: 10px;
-  color: white;
-  font-size: 12px;
-}
-
-/* CORES */
-.aguardando .status { background: orange; }
-.confirmados .status { background: green; }
-.realizados .status { background: blue; }
-.recusados .status { background: red; }
-.cancelados .status { background: gray; }
-
-/* DESCRIÇÃO */
-.desc {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #555;
-}
-
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer {
   text-align: center;
   padding: 15px;
   background: #eee;
-  font-size: 14px; /* 🔥 tamanho igual ao início */
+  font-size: 14px;
 }

@@ -73,67 +73,38 @@ h2 {
     min-width: 28px;
 }
 
-.alerta {
-    padding: 10px 15px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: left;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.alerta.status {
-    background-color: #ffc967;
-    color: #804a00;
-}
-
-.alerta.info {
-    background-color: #b8c0ff;
-    color: #1f2469;
-}
-
-.botoes-finais {
+.botoes {
     display: flex;
     justify-content: center;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
-button {
+.btn-voltar,
+.btn-agendamentos {
     border: none;
     padding: 12px 22px;
     border-radius: 25px;
     font-size: 14px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
+    transition: 0.3s;
+    font-weight: bold;
 }
 
-button i {
-    font-size: 16px;
-}
-
-.voltar {
+.btn-voltar {
     background-color: #e0e0e0;
     color: #000;
 }
 
-.voltar:hover {
+.btn-voltar:hover {
     background-color: #cfcfcf;
 }
 
-.ver-agendamentos {
+.btn-agendamentos {
     background-color: #58c7ff;
     color: white;
 }
 
-.ver-agendamentos:hover {
+.btn-agendamentos:hover {
     background-color: #3ea4f7;
 }

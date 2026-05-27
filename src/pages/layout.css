@@ -10,11 +10,6 @@
 /* LOGO */
 
 .top-logo-inicio {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 60px;
-    width: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,11 +17,11 @@
 }
 
 .top-logo-inicio img {
-    width: 105px;
-    height: 48px;
+    width: 100px;
+    height: 80px;
     object-fit: contain;
     background: transparent;
-    mix-blend-mode: multiply;
+    /* mix-blend-mode: multiply; */
 }
 
 
@@ -37,8 +32,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 0px;
   flex-shrink: 0;
+  height: 80px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

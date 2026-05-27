@@ -24,6 +24,7 @@ body {
     min-height: 100vh;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -42,8 +43,6 @@ body {
 /* ===== LOGO ===== */
 
 .top-logo {
-    position: absolute;
-    top: 20px;
     z-index: 1;
 }
 
@@ -63,7 +62,7 @@ body {
     text-align: center;
     position: relative;
     z-index: 3;
-    margin-top: 80px;
+    /* margin-top: 80px; */
 }
 
 .login-box h1 {
@@ -266,9 +265,9 @@ body {
     height: 220px;
     border: 18px solid #15ff00;
     border-radius: 50%;
-    top: 35px;
-    right: 295px;
-    z-index: 2;
+    top: 100px;
+    right: 350px;
+    z-index: 1;
 }
 
 /* TRIÂNGULO */

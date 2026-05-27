@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import BotaoLogin from "../componentes/BotaoLogin";
+
+import logo from "../assets/logo-login.png";
+import Carregando from "../componentes/Carregando";
 
 // Banco de dados fake
 const usuarios = [
@@ -50,8 +54,10 @@ function Login() {
 
       <div className="top-logo">
         <img
-          src="https://maristabrasil-my.sharepoint.com/:i:/r/personal/21620230039_maristabrasil_g12_br/Documents/Imagens/Capturas%20de%20tela/logos.png?csf=1&web=1&e=dlTCtt"
+          src={logo}
           alt="Logo Marista"
+          width={"306px"}
+          height={"107px"}
         />
       </div>
 
@@ -70,32 +76,32 @@ function Login() {
               <span>Tipo de Usuário</span>
 
               <div className="buttons">
-                <button
-                  type="button"
-                  className={`user-btn ${tipoUsuario === "aluno" ? "active aluno" : ""}`}
-                  onClick={() => setTipoUsuario("aluno")}
+                <BotaoLogin
+                  tipoBotao={"aluno"}
+                  aoClicar={() => setTipoUsuario("aluno")}
+                  ativo={tipoUsuario === "aluno"} 
                 >
                   <i className="fa-solid fa-user"></i>
                   Aluno
-                </button>
+                </BotaoLogin>
 
-                <button
-                  type="button"
-                  className={`user-btn ${tipoUsuario === "responsavel" ? "active responsavel" : ""}`}
-                  onClick={() => setTipoUsuario("responsavel")}
+                <BotaoLogin
+                  tipoBotao={"responsavel"}
+                  aoClicar={() => setTipoUsuario("responsavel")}
+                  ativo={tipoUsuario === "responsavel"} 
                 >
                   <i className="fa-solid fa-users"></i>
                   Responsável
-                </button>
+                </BotaoLogin>
 
-                <button
-                  type="button"
-                  className={`user-btn ${tipoUsuario === "profissional" ? "active profissional" : ""}`}
-                  onClick={() => setTipoUsuario("profissional")}
+                <BotaoLogin
+                  tipoBotao={"profissional"}
+                  aoClicar={() => setTipoUsuario("profissional")}
+                  ativo={tipoUsuario === "profissional"} 
                 >
                   <i className="fa-solid fa-briefcase"></i>
                   Profissional
-                </button>
+                </BotaoLogin>
               </div>
             </div>
 
@@ -143,10 +149,7 @@ function Login() {
       </form>
 
       {loading && (
-        <div id="loadingScreen" style={{ display: "flex" }}>
-          <div className="spinner"></div>
-          <p>Acessando o site...</p>
-        </div>
+        <Carregando mensagem="Acessando o site..."/>
       )}
     </div>
   );

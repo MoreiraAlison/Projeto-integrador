@@ -1,6 +1,8 @@
 import React from "react";
 import "./layout.css";
 
+import logo from "../assets/logo.png"
+
 function Layout({ children, usuario, onLogout, onNotifications }) {
   return (
     <div className="layout-wrapper">
@@ -8,8 +10,7 @@ function Layout({ children, usuario, onLogout, onNotifications }) {
         <div className="logo-area">
        <div className="top-logo-inicio">
         <img
-          src="https://maristabrasil-my.sharepoint.com/:i:/r/personal/21620230039_maristabrasil_g12_br/Documents/Imagens/Capturas%20de%20tela/Captura%20de%20tela%202026-02-23%20083349.png?csf=1&web=1&e=Mv6POO"
-          alt="Logo"
+          src={logo}
         />
       </div>
         </div>
