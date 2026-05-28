@@ -200,7 +200,7 @@ function Historico() {
                     </button>
 
                     <button className="btn-cancelar">
-                      Cancelar
+                      🗑 Cancelar
                     </button>
                   </>
                 )}

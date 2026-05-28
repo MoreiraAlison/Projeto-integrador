@@ -9,9 +9,11 @@ function Layout({ children, usuario, onLogout, onNotifications }) {
       <header className="topbar">
         <div className="logo-area">
        <div className="top-logo-inicio">
+        <a href="/inicio">
         <img
           src={logo}
         />
+        </a>
       </div>
         </div>
 
