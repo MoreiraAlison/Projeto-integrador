@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import "./historico.css";
 import Card from "../componentes/Card";
+import Selo from "../componentes/Selo";
 
 // Dados fake de agendamentos
 const agendamentosFake = [
@@ -154,7 +155,7 @@ function Historico() {
 
                 <h3>{agendamento.profissional}</h3>
 
-                <span
+                {/* <span
                   className="status"
                   style={{
                     backgroundColor: getStatusColor(agendamento.status)
@@ -165,7 +166,12 @@ function Historico() {
                   {agendamento.status === "recusados" && "Recusado"}
                   {agendamento.status === "cancelados" && "Cancelado"}
                   {agendamento.status === "aguardando" && "Aguardando"}
-                </span>
+                </span> */}
+
+                <Selo 
+                  cor={"amarelo"}
+                  texto={agendamento.status}
+                />
 
               </div>
 

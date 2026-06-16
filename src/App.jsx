@@ -5,15 +5,20 @@ import Inicio from "./pages/inicio";
 import Agendamento from "./pages/agendamento";
 import Historico from "./pages/historico";
 import Solicitacao from "./pages/solicitacao";
+import AdminLogin from "./pages/AdminLogin";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/agendamento" element={<Agendamento />} />
         <Route path="/historico" element={<Historico />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/solicitacao" element={<Solicitacao />} />
         <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>

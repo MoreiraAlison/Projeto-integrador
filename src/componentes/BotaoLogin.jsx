@@ -1,3 +1,5 @@
+import "./BotaoLogin.css"
+
 export default function BotaoLogin({ children, aoClicar, tipoBotao, ativo }) {
     let estiloBotao;
 
@@ -7,12 +9,14 @@ export default function BotaoLogin({ children, aoClicar, tipoBotao, ativo }) {
         estiloBotao = "profissional"
     } else if (tipoBotao === "responsavel"){
         estiloBotao = "responsavel"
-    }
+    } else if (tipoBotao === "admin"){
+        estiloBotao = "admin"
+    } 
     
     return (
         <button
             type="button"
-            className={`user-btn ${estiloBotao} ${ativo === true ? "active" : ""}`}
+            className={`button user-btn ${estiloBotao} ${ativo === true ? "active" : ""}`}
             onClick={aoClicar}
         >
             {children}

@@ -79,7 +79,7 @@ function Login() {
                 <BotaoLogin
                   tipoBotao={"aluno"}
                   aoClicar={() => setTipoUsuario("aluno")}
-                  ativo={tipoUsuario === "aluno"} 
+                  ativo={tipoUsuario === "aluno"}
                 >
                   <i className="fa-solid fa-user"></i>
                   Aluno
@@ -88,7 +88,7 @@ function Login() {
                 <BotaoLogin
                   tipoBotao={"responsavel"}
                   aoClicar={() => setTipoUsuario("responsavel")}
-                  ativo={tipoUsuario === "responsavel"} 
+                  ativo={tipoUsuario === "responsavel"}
                 >
                   <i className="fa-solid fa-users"></i>
                   Responsável
@@ -97,7 +97,7 @@ function Login() {
                 <BotaoLogin
                   tipoBotao={"profissional"}
                   aoClicar={() => setTipoUsuario("profissional")}
-                  ativo={tipoUsuario === "profissional"} 
+                  ativo={tipoUsuario === "profissional"}
                 >
                   <i className="fa-solid fa-briefcase"></i>
                   Profissional
@@ -115,7 +115,7 @@ function Login() {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="aluno@maristabrasil"
+                  placeholder="aluno@agende.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -144,12 +144,20 @@ function Login() {
             <button className="login-btn" type="submit">
               Entrar
             </button>
+
+            <button
+              type="button"
+              className="admin-btn"
+              onClick={() => navigate("/admin-login")}
+            >
+              Admin
+            </button>
           </div>
         </div>
       </form>
 
       {loading && (
-        <Carregando mensagem="Acessando o site..."/>
+        <Carregando mensagem="Acessando o site..." />
       )}
     </div>
   );

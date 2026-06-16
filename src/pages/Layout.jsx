@@ -29,7 +29,10 @@ function Layout({ children, usuario, onLogout, onNotifications }) {
                 ? usuario.cargo 
                 : usuario?.tipo === "aluno" 
                 ? "Aluno" 
-                : "Responsável"}
+                : usuario?.tipo === "responsavel"
+                ? "Responsável"
+                : "Administrador"
+              }
             </span>
           </div>
 

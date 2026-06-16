@@ -1,0 +1,51 @@
+.button {
+    flex: 1;
+    height: 65px;
+    border: none;
+    border-radius: 10px;
+    background: #ccc;
+    color: #555;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    max-width: 83px;
+
+    transition: 0.2s ease;
+    padding: 4px;
+}
+
+.button:hover {
+    transform: scale(1.03);
+}
+
+.button.active {
+    background: #4a90e2;
+    color: white;
+}
+
+.button.active.aluno {
+    background: #4a90e2;
+    color: #fff;
+}
+
+.button.active.responsavel {
+    background: #8423C5;
+    color: #fff;
+}
+
+.button.active.profissional {
+    background: #133B64;
+    color: #fff;
+}
+
+.button.active.admin {
+    background: #f70a0a;
+    color: #fff;
+}
