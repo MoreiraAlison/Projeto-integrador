@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import AdicionarUsuario from "../componentes/AdicionarUsuario";
 import EditarUsuario from "../componentes/EditarUsuario";
+import Selo from "../componentes/Selo";
 
 export default function Admin() {
 
@@ -77,6 +78,13 @@ export default function Admin() {
       );
     }
   };
+
+  const corSelo = {
+    Profissional: "azul-escuro",
+    Responsável: "roxo",
+    Aluno: "azul-claro"
+  }
+
 
   return (
     <Layout
@@ -161,30 +169,14 @@ export default function Admin() {
                       }}
                     >
 
-                      <span
-                        className={
-                          usuarioLista.tipo?.toLowerCase() === "aluno"
-                            ? "tag aluno"
-                            : usuarioLista.tipo?.toLowerCase() === "responsável" ||
-                              usuarioLista.tipo?.toLowerCase() === "responsavel"
-                            ? "tag responsavel"
-                            : "tag profissional"
+                      <Selo
+                        texto={usuarioLista.tipo}
+                        textoSecundario={
+                          usuarioLista.tipo.toLocaleLowerCase() === "profissional"
+                            ? usuarioLista.cargo : undefined
                         }
-                      >
-                        {usuarioLista.tipo}
-                      </span>
-
-                      {usuarioLista.tipo?.toLowerCase() === "profissional" &&
-                        usuarioLista.cargo && (
-                          <small
-                            style={{
-                              color: "#555",
-                              fontSize: "12px"
-                            }}
-                          >
-                            {usuarioLista.cargo}
-                          </small>
-                        )}
+                        cor={corSelo[usuarioLista.tipo]}
+                      />
 
                     </div>
 

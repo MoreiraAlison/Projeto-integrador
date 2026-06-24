@@ -57,31 +57,7 @@ function Inicio() {
     >
 
       {/* ===== PROFISSIONAL ===== */}
-      {usuario.tipo === "profissional" ? (
-        <div className="profissional-container">
-
-          <div className="profissional-buttons">
-            <button
-              className="btn-agendamentos"
-              onClick={() => handleNavigation("visualizar")}
-            >
-              Ver meus agendamentos
-            </button>
-
-            <button
-              className="btn-criar"
-              onClick={() => handleNavigation("criar")}
-            >
-              <i className="fa-solid fa-plus"></i>
-              Criar agendamento
-            </button>
-          </div>
-
-        </div>
-      ) : (
-
-        /* ===== ALUNO E RESPONSÁVEL (SEM ALTERAR) ===== */
-
+    
         <div className="inicio-content">
           <h2>Bem-vindo ao Agende+</h2>
 
@@ -90,7 +66,7 @@ function Inicio() {
           </p>
 
           <div className="cards">
-            {usuario.tipo !== "profissional" && (
+          
               <div className="card" onClick={() => handleNavigation("criar")}>
                 <i className="fa-regular fa-calendar-plus icon blue"></i>
                 <h3>Criar agendamento</h3>
@@ -98,7 +74,7 @@ function Inicio() {
                   Agende uma nova reunião ou atendimento com professores ou coordenadores.
                 </p>
               </div>
-            )}
+        
 
             <div className="card" onClick={() => handleNavigation("visualizar")}>
               <i className="fa-solid fa-clock-rotate-left icon purple"></i>
@@ -111,8 +87,6 @@ function Inicio() {
             </div>
           </div>
         </div>
-
-      )}
 
       {loading && (
         <Carregando mensagem="Saindo..."/>

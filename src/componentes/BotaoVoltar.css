@@ -1,0 +1,16 @@
+.voltar {
+  background: rgb(5, 56, 77);
+  border: 1px solid #1f4568;
+  border-radius: 25px;
+  color: #b7dcff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: 0.2s;
+  width: fit-content;
+  padding: 10px;
+}
+
+.voltar:hover {
+  opacity: 0.7;
+}
