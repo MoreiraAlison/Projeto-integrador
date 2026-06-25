@@ -197,13 +197,13 @@ function Historico() {
 
         <h2>
           {usuario.tipo === "profissional"
-            ? "Solicitações Recebidas"
+            ? "Histórico de Agendamentos"
             : "Histórico de Agendamentos"}
         </h2>
 
         <p className="sub">
           {usuario.tipo === "profissional"
-            ? "Gerencie as solicitações recebidas."
+            ? "Gerencie seu histórico de agendamentos."
             : "Veja seus agendamentos anteriores."}
         </p>
 
