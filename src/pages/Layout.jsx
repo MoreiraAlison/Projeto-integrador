@@ -1,7 +1,7 @@
 import React from "react";
 import "./layout.css";
 
-import logo from "../assets/logo.png"
+import logo from "../assets/logo4.png"
 
 function Layout({ children, usuario, onLogout, onNotifications }) {
   return (
