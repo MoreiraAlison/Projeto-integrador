@@ -1,0 +1,250 @@
+/* ===== LAYOUT GLOBAL ===== */
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== LOGO ===== */
+
+.top-logo-inicio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-logo-inicio img {
+  width: 100px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* ===== HEADER ===== */
+
+.topbar {
+  background: #1f4568;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 10px 0;
+  height: 80px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.logo-area {
+  flex: 0 0 100px;
+}
+
+.topbar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+}
+
+/* ===== USER ===== */
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-area i {
+  font-size: 18px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.user-area i:hover {
+  opacity: .8;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 12px;
+}
+
+.user-info .name {
+  font-weight: bold;
+}
+
+.user-info .role {
+  font-size: 11px;
+}
+
+/* ===== BOTÃO MENU ===== */
+
+.menu-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.menu-btn i {
+  font-size: 20px;
+}
+
+.menu-btn:hover {
+  background: rgba(255, 255, 255, .15);
+}
+
+/* ===== MENU LATERAL ===== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 280px;
+  height: 100%;
+  background: hsl(0, 0%, 100%);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+  transition: 0.3s;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+/* CABEÇALHO */
+
+.sidebar-header {
+  background: #1f4568;
+  padding: 25px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #e5e5e5;
+  overflow: hidden;
+}
+
+/* LOGO */
+
+.sidebar-header img {
+  width: 220px;
+  height: 90px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  transform: translateX(-12px);
+}
+
+/* LINKS */
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.sidebar nav a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, .15);
+}
+
+/* BOTÃO SAIR */
+
+.sidebar-logout {
+  margin: auto 20px 25px;
+  border: none;
+  background: rgb(255, 0, 0);
+  color: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.sidebar-logout:hover {
+  background: #ececec;
+}
+
+/* ===== MAIN ===== */
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #f2f2f2;
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+  background: #1f4568;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 12px;
+}
+
+/* ===== SCROLL ===== */
+
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width:768px) {
+
+  .topbar h1 {
+    font-size: 16px;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .sidebar {
+    width: 240px;
+  }
+
+}

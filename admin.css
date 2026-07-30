@@ -1,0 +1,226 @@
+.admin-page {
+  min-height: 100vh;
+  background: #f1f1f1;
+}
+
+/* HEADER */
+
+.logo-area img {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.topbar {
+  background: #012c58;
+  color: white;
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+.topbar h1 {
+  font-size: 24px;
+  font-family: Georgia, serif;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-area i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.user-info span {
+  font-size: 14px;
+}
+
+.user-info small {
+  font-size: 12px;
+}
+
+/* CONTAINER */
+
+.admin-container {
+  margin: 25px;
+  padding: 30px;
+
+  background: #ececec;
+
+  border-radius: 25px;
+
+  min-height: calc(100vh - 180px);
+}
+
+/* TOPO */
+
+.titulo-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-area h2 {
+  font-size: 32px;
+  color: #173f6c;
+  font-family: Georgia, serif;
+}
+
+.titulo-area p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.btn-adicionar {
+  background: #56c0f3;
+  color: white;
+
+  border: none;
+  border-radius: 25px;
+
+  padding: 12px 20px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* BUSCA */
+
+.busca {
+  margin-top: 30px;
+
+  width: 60%;
+
+  background: #e9e1ec;
+
+  border-radius: 20px;
+
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.busca i {
+  font-size: 18px;
+}
+
+.busca input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+}
+
+/* CARDS */
+
+.lista-usuarios {
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.usuario-card {
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 15px 25px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.usuario-info i {
+  font-size: 24px;
+}
+
+.usuario-info h3 {
+  color: #173f6c;
+  font-size: 18px;
+}
+
+.usuario-info p {
+  font-size: 14px;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+
+/* .aluno {
+  background: #8196ff;
+} */
+
+/* .responsavel {
+  background: #b96cf2;
+} */
+
+.editar,
+.excluir {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.editar i {
+  color: #45b8ff;
+  font-size: 20px;
+}
+
+.excluir i {
+  color: red;
+  font-size: 20px;
+}
+
+.tipo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.cargo-profissional {
+  font-size: 12px;
+  color: #555;
+}
+
+/*.profissional {
+  background: #133B64;
+}

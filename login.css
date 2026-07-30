@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    background-color: #183f63;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== FUNDO ===== */
+
+.login-container {
+    background-color: #012C58;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== LOGO ===== */
+
+.top-logo {
+    z-index: 1;
+}
+
+.top-logo img {
+    width: 320px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+
+/* ===== CARD ===== */
+
+.login-box {
+    background: #e6e6e6;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+    /* margin-top: 80px; */
+}
+
+.login-box h1 {
+    font-size: 26px;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.user-type {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.user-type span {
+    font-size: 12px;
+    color: #333;
+}
+
+/* ===== BOTÕES ===== */
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.buttons button i {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* ===== INPUTS ===== */
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    outline: none;
+}
+
+.input-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 10px;
+    color: #999;
+    pointer-events: none;
+}
+
+.input-icon input {
+    padding-left: 35px;
+}
+
+/* ===== BOTÃO ===== */
+
+.login-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    background: #0a2f6b;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-btn:hover {
+    background: #357abd;
+}
+
+/* ===== LOADING ===== */
+
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    font-size: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4a90e2;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== FORMAS ===== */
+
+.purple-circle {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border: 58px solid #b84cff;
+    border-radius: 50%;
+    top: -140px;
+    left: -140px;
+}
+
+/* CÍRCULO VERDE */
+
+.green-circle {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 18px solid #15ff00;
+    border-radius: 50%;
+    top: 100px;
+    right: 350px;
+    z-index: 1;
+}
+
+/* TRIÂNGULO */
+
+.red-shape {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 200px solid #ff0000;
+    bottom: 50px;
+    right: 30px;
+    transform: rotate(18deg);
+    z-index: 1;
+}
+
+/* ESTRELA */
+
+.yellow-star {
+    position: absolute;
+    left: 40px;
+    bottom: 70px;
+    width: 230px;
+    height: 230px;
+    background: yellow;
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+    transform: rotate(-18deg);
+}
+.admin-btn {
+    margin-top: 8px;
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 11px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+
+    width: 100%;
+}
+
+.admin-btn:hover {
+    text-decoration: underline;
+}
