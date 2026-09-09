@@ -275,7 +275,7 @@ function Sobre() {
                                     </td>
 
                                     <td>
-                                        Desenvolvedor Front-end / UI & UX
+                                        Desenvolvedor Front-end/Back-end / UI & UX
                                     </td>
 
                                 </tr>
@@ -344,19 +344,7 @@ function Sobre() {
                                     </td>
 
                                     <td>
-                                        Banco de Dados
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>
-                                        __________________
-                                    </td>
-
-                                    <td>
-                                        Desenvolvedor Back-end
+                                        Banco de Dados / Back-end
                                     </td>
 
                                 </tr>
