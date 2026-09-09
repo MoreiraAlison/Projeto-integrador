@@ -268,96 +268,98 @@ function Sobre() {
 
                         <tbody>
 
+                                <tr>
+
+                                    <td>
+                                        Alison Moreira
+                                    </td>
+
+                                    <td>
+                                        Desenvolvedor Front-end / UI & UX
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        Érika Letícia dos Santos Bueno Mazurek
+                                    </td>
+
+                                    <td>
+                                        Testes / UI & UX
+                                    </td>
+
+                                </tr>
+
+                                    <td>
+                                        Luana Gabrielly da Silva Cesário
+                                    </td>
+
+                                    <td>
+                                        Banco de Dados
+                                    </td>
 
 
-                            <tr>
+                                <tr>
 
-                                <td>
-                                    Alison Moreira
-                                </td>
+                                    <td>
+                                        Maria Eduarda Silva Beltramim
+                                    </td>
 
+                                    <td>
+                                        Desenvolvedor Front-end
+                                    </td>
 
-                                <td>
-                                    Desenvolvedor Front-end / UI & UX
-                                </td>
+                                </tr>
 
+                                <tr>
 
-                            </tr>
+                                    <td>
+                                        Mirelli Gonçalves Beker
+                                    </td>
 
-                            <tr>
+                                    <td>
+                                        Documentação
+                                    </td>
 
+                                </tr>
 
-                                <td>
-                                    Maria Eduarda Silva Beltramim
-                                </td>
+                                <tr>
 
+                                    <td>
+                                        Thalia Gabrielli Batista Brites
+                                    </td>
 
-                                <td>
-                                    Desenvolvedor Front-end
-                                </td>
+                                    <td>
+                                        Banco de Dados
+                                    </td>
 
+                                </tr>
 
-                            </tr>
+                                <tr>
 
-                            <tr>
+                                    <td>
+                                        Vitória Martini Pellizzaro
+                                    </td>
 
+                                    <td>
+                                        Banco de Dados
+                                    </td>
 
-                                <td>
-                                    __________________
-                                </td>
+                                </tr>
 
+                                <tr>
 
-                                <td>
-                                    Desenvolvedor Back-end
-                                </td>
+                                    <td>
+                                        __________________
+                                    </td>
 
+                                    <td>
+                                        Desenvolvedor Back-end
+                                    </td>
 
-                            </tr>
-
-                            <tr>
-
-
-                                <td>
-                                    Vitória Martini Pellizzaro
-                                </td>
-
-
-                                <td>
-                                    Banco de Dados
-                                </td>
-
-
-                            </tr>
-
-                            <tr>
-
-
-                                <td>
-                                    Mirelli Gonçalves Beker
-                                </td>
-
-
-                                <td>
-                                    Documentação
-                                </td>
-
-
-                            </tr>
-
-                            <tr>
-
-
-                                <td>
-                                    Érika Letícia dos Santos Bueno Mazurek
-                                </td>
-
-
-                                <td>
-                                    Testes / UI & UX
-                                </td>
-
-
-                            </tr>
+                                </tr>
 
                         </tbody>
 
