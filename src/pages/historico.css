@@ -1,4 +1,9 @@
-/* RESET */
+/* ===== RESET ===== */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -6,6 +11,7 @@ body {
 }
 
 /* ===== HISTORICO CONTENT ===== */
+
 .historico-content {
   padding: 30px;
   display: flex;
@@ -14,7 +20,8 @@ body {
   flex: 1;
 }
 
-/* CONTAINER */
+/* ===== CONTAINER ===== */
+
 .container {
   text-align: center;
 }
@@ -31,6 +38,7 @@ body {
 }
 
 /* ===== FILTROS ===== */
+
 .filtros {
   display: flex;
   align-items: center;
@@ -71,14 +79,57 @@ body {
   border-color: #1f4568;
 }
 
-/* ===== CARDS ===== */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
+.filtros button.agendamento-ativo2 {
+  background: #44f39c;
+  color: rgb(0, 0, 0);
+  border-color: #44f39c;
 }
 
+.filtros button.agendamento-ativo1 {
+  background: #f700ff;
+  color: rgb(0, 0, 0);
+  border-color: #f700ff;
+}
+
+/* ===== CARDS ===== */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* CARD INDIVIDUAL */
+
+.cards > .card {
+  width: 100%;
+  min-width: 0;
+  min-height: 220px;
+  padding: 22px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  transition: 0.3s;
+}
+
+.cards > .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* STATUS */
+
 .status {
+  display: inline-block;
+  width: fit-content;
   padding: 4px 10px;
   border-radius: 20px;
   color: white;
@@ -86,24 +137,34 @@ body {
   font-weight: bold;
 }
 
-.card p {
+/* TEXTOS DOS CARDS */
+
+.cards > .card p {
   margin: 7px 0;
   color: #666;
   font-size: 13px;
   line-height: 1.4;
 }
 
+/* RODAPÉ DOS CARDS */
+
 .card-footer {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
-  margin-top: 15px;
-  padding-top: 10px;
+  margin-top: auto;
+  padding-top: 15px;
   border-top: 1px solid #f0f0f0;
 }
+
+/* BOTÕES DOS CARDS */
 
 .btn-editar,
 .btn-cancelar,
 .btn-confirmar,
+.btn-excluir,
 .btn-recusar {
   flex: 1;
   padding: 8px 10px;
@@ -115,6 +176,7 @@ body {
 }
 
 /* ALUNO E RESPONSÁVEL */
+
 .btn-editar {
   background: #4da6ff;
   color: white;
@@ -125,18 +187,31 @@ body {
 }
 
 .btn-cancelar {
+  background: rgb(255, 79, 60);
+  color: #fff;
+  border: 1px solid rgb(255, 79, 60);
+}
+
+.btn-cancelar:hover {
+  background: rgb(255, 59, 60);
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-excluir {
   background: transparent;
   color: #f00;
   border: 1px solid #f00;
 }
 
-.btn-cancelar:hover {
+.btn-excluir:hover {
   background: #f00;
   color: #fff;
   font-weight: bold;
 }
 
 /* PROFISSIONAL */
+
 .btn-confirmar {
   background: #28a745;
   color: white;
@@ -156,6 +231,7 @@ body {
 }
 
 /* EMPTY STATE */
+
 .empty-state {
   width: 100%;
   text-align: center;
@@ -163,12 +239,25 @@ body {
   color: #999;
 }
 
-
-
 /* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
+
+@media (max-width: 900px) {
   .cards {
-    justify-content: center;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .historico-content {
+    padding: 20px 15px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cards > .card {
+    width: 100%;
   }
 
   .filtros {
@@ -179,15 +268,22 @@ body {
   .filtros .botoes {
     width: 100%;
   }
+
+  .card-footer {
+    flex-wrap: wrap;
+  }
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
+
 footer {
   text-align: center;
   padding: 15px;
   background: #eee;
   font-size: 14px;
 }
+
+/* ===== MODAL ===== */
 
 .modal-overlay {
   position: fixed;

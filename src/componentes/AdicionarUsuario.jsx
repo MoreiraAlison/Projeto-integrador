@@ -1,12 +1,7 @@
 import { useState } from "react";
 import "./usuario.css";
 
-export default function AdicionarUsuario({
-  aberto,
-  fechar,
-  adicionarUsuario
-}) {
-
+export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -16,19 +11,22 @@ export default function AdicionarUsuario({
   if (!aberto) return null;
 
   const handleSubmit = () => {
-
     if (!nome || !email || !senha) {
       alert("Preencha todos os campos!");
       return;
     }
 
+    if (tipo === "Profissional" && !cargo.trim()) {
+      alert("Informe a função do profissional!");
+      return;
+    }
+
     adicionarUsuario({
-      id: Date.now(),
       nome,
       email,
       senha,
       tipo,
-      cargo
+      funcao: tipo === "Profissional" ? cargo.trim() : null,
     });
 
     setNome("");
@@ -40,11 +38,19 @@ export default function AdicionarUsuario({
     fechar();
   };
 
+  const handleTipoChange = (e) => {
+    const novoTipo = e.target.value;
+
+    setTipo(novoTipo);
+
+    if (novoTipo !== "Profissional") {
+      setCargo("");
+    }
+  };
+
   return (
     <div className="modal-overlay">
-
       <div className="modal-container">
-
         <h2>Adicionar Usuário</h2>
 
         <div className="campo">
@@ -77,10 +83,7 @@ export default function AdicionarUsuario({
         <div className="campo">
           <label>Tipo de Usuário</label>
 
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          >
+          <select value={tipo} onChange={handleTipoChange}>
             <option value="Aluno">Aluno</option>
             <option value="Responsável">Responsável</option>
             <option value="Profissional">Profissional</option>
@@ -89,11 +92,11 @@ export default function AdicionarUsuario({
 
         {tipo === "Profissional" && (
           <div className="campo">
-            <label>Cargo/Função</label>
+            <label>Função na escola</label>
 
             <input
               type="text"
-              placeholder="Professor(a), Coordenador(a)..."
+              placeholder="Professor(a), Coordenador(a), Diretor(a)..."
               value={cargo}
               onChange={(e) => setCargo(e.target.value)}
             />
@@ -101,25 +104,15 @@ export default function AdicionarUsuario({
         )}
 
         <div className="modal-botoes">
-
-          <button
-            className="cancelar"
-            onClick={fechar}
-          >
+          <button className="cancelar" onClick={fechar}>
             Cancelar
           </button>
 
-          <button
-            className="confirmar"
-            onClick={handleSubmit}
-          >
+          <button className="confirmar" onClick={handleSubmit}>
             Confirmar
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }

@@ -6,55 +6,15 @@ import Card from "../componentes/Card";
 import Selo from "../componentes/Selo";
 import CardTitulo from "../componentes/CardTitulo";
 import BotaoVoltar from "../componentes/Botaovoltar";
+import { api } from "../services/api";
+import { useAutenticador } from "../context/AutenticadorContexto";
 
 function Historico() {
+  const { usuario } = useAutenticador();
 
-  const agendamentosFake = [
-    {
-      id: 1,
-      profissional: "Maria Júlia",
-      data: "15/04/2026",
-      hora: "09:00",
-      motivo: "Conversar sobre notas",
-      status: "aguardando"
-    },
-    {
-      id: 2,
-      profissional: "João Pedro",
-      data: "16/04/2026",
-      hora: "14:00",
-      motivo: "Avaliação de desempenho",
-      status: "confirmados"
-    },
-    {
-      id: 3,
-      profissional: "Angélica Lima",
-      data: "10/04/2026",
-      hora: "10:00",
-      motivo: "Acompanhamento pedagógico",
-      status: "realizados"
-    },
-    {
-      id: 4,
-      profissional: "João Pedro",
-      data: "08/04/2026",
-      hora: "11:00",
-      motivo: "Discussão de projeto",
-      status: "recusados"
-    },
-    {
-      id: 5,
-      profissional: "Maria Júlia",
-      data: "05/04/2026",
-      hora: "15:00",
-      motivo: "Reunião geral",
-      status: "cancelados"
-    }
-  ];
-
-  const [usuario, setUsuario] = useState(null);
   const [filtroAtivo, setFiltroAtivo] = useState("todos");
-  const [agendamentos, setAgendamentos] = useState(agendamentosFake);
+  const [tipoAgendamento, setTipoAgendamento] = useState("meus");
+  const [agendamentos, setAgendamentos] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
   const [mensagemModal, setMensagemModal] = useState("");
   const [acaoPendente, setAcaoPendente] = useState(null);
@@ -68,117 +28,145 @@ function Historico() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const dados = JSON.parse(localStorage.getItem("usuario"));
-
-    if (!dados) {
+    if (!usuario) {
       navigate("/login");
-    } else {
-      setUsuario(dados);
+      return;
     }
-  }, [navigate]);
+
+    const carregar = async () => {
+      try {
+        if (tipoAgendamento === "seus") {
+          setAgendamentos(await api.agendamentosRecebido(usuario.id));
+        } else {
+          setAgendamentos(await api.agendamentosPorUsuario(usuario.id));
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    carregar();
+  }, [navigate, tipoAgendamento, usuario]);
 
   const handleFiltro = (filtro) => {
-    setFiltroAtivo(filtro.toLowerCase());
+    setFiltroAtivo(filtro);
   };
 
   const handleLogout = () => {
-    abrirConfirmacao(
-      "Você tem certeza que deseja sair?",
-      () => {
-        localStorage.removeItem("usuario");
-        navigate("/login");
-      }
-    );
+    abrirConfirmacao("Você tem certeza que deseja sair?", () => {
+      localStorage.removeItem("usuario");
+      navigate("/login");
+    });
   };
 
   const handleNotifications = () => {
-    abrirConfirmacao(
-      "Deseja abrir as notificações?",
-      () => { }
-    );
+    abrirConfirmacao("Deseja abrir as notificações?", () => {});
   };
 
   const confirmarAgendamento = (id) => {
     abrirConfirmacao(
       "Você tem certeza que deseja confirmar este agendamento?",
-      () => {
-        setAgendamentos(
-          agendamentos.map((agendamento) =>
-            agendamento.id === id
-              ? { ...agendamento, status: "confirmados" }
-              : agendamento
-          )
-        );
-      }
+      async () => {
+        try {
+          const atualizado = await api.confirmarAgendamento(id, {
+            status: "Confirmado",
+          });
+
+          setAgendamentos(await api.agendamentosRecebido(usuario.id));
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     );
   };
 
   const recusarAgendamento = (id) => {
     abrirConfirmacao(
       "Você tem certeza que deseja recusar este agendamento?",
-      () => {
-        setAgendamentos(
-          agendamentos.map((agendamento) =>
-            agendamento.id === id
-              ? { ...agendamento, status: "recusados" }
-              : agendamento
-          )
-        );
-      }
+      async () => {
+        try {
+          const atualizado = await api.recusarAgendamento(id, {
+            status: "Recusado",
+          });
+
+          setAgendamentos(await api.agendamentosRecebido(usuario.id));
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     );
   };
 
-
   const cancelarAgendamento = (id) => {
+    console.log("aqui");
+
     abrirConfirmacao(
       "Você tem certeza que deseja cancelar este agendamento?",
-      () => {
-        setAgendamentos(
-          agendamentos.map((agendamento) =>
-            agendamento.id === id
-              ? { ...agendamento, status: "cancelados" }
-              : agendamento
-          )
-        );
-      }
+      async () => {
+        try {
+          await api.cancelarAgendamento(id, {
+            status: "Cancelado",
+          });
+
+          setAgendamentos(await api.agendamentosRecebido(usuario.id));
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     );
   };
 
   const excluirAgendamento = (id) => {
     abrirConfirmacao(
       "Você tem certeza que deseja excluir este agendamento?",
-      () => {
-        setAgendamentos(
-          agendamentos.filter(
-            (agendamento) => agendamento.id !== id
-          )
-        );
-      }
+      async () => {
+        try {
+          await api.excluirAgendamento(id);
+
+          setAgendamentos((lista) => lista.filter((a) => a.id !== id));
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     );
   };
 
   const agendamentosFiltrados = agendamentos.filter((agendamento) => {
-
     if (filtroAtivo === "todos") {
       return true;
     }
 
     return agendamento.status === filtroAtivo;
-
   });
 
   const getStatusColor = (status) => {
-
     const cores = {
-      aguardando: "amarelo",
-      confirmados: "verde",
-      realizados: "azul-claro",
-      recusados: "vermelho",
-      cancelados: "cinza"
+      Aguardando: "amarelo",
+      Confirmado: "verde",
+      Realizado: "azul-claro",
+      Recusado: "vermelho",
+      Cancelado: "cinza",
     };
 
     return cores[status] || "cinza";
+  };
 
+  const getStatusTexto = (status) => {
+    const cores = {
+      Aguardando: (
+        <>
+          Aguardando
+          <br />
+          Confirmação
+        </>
+      ),
+      Confirmado: "Confirmado",
+      Realizado: "Realizado",
+      Recusado: "Recusado",
+      Cancelado: "Cancelado",
+    };
+
+    return cores[status] || "Cancelado";
   };
 
   if (!usuario) {
@@ -192,27 +180,40 @@ function Historico() {
       onNotifications={handleNotifications}
     >
       <div className="historico-content">
-
         <BotaoVoltar />
 
         <h2>
-          {usuario.tipo === "profissional"
+          {usuario?.tipo_usuario?.tipo === "Profissional"
             ? "Histórico de Agendamentos"
             : "Histórico de Agendamentos"}
         </h2>
 
         <p className="sub">
-          {usuario.tipo === "profissional"
+          {usuario?.tipo_usuario?.tipo === "Profissional"
             ? "Gerencie seu histórico de agendamentos."
-            : "Veja seus agendamentos anteriores."}
+            : "Veja seus agendamentos."}
+
+          <div className="filtros">
+            <button
+              className={tipoAgendamento === "meus" ? "agendamento-ativo1" : ""}
+              onClick={() => setTipoAgendamento("meus")}
+            >
+              Meus Agendamentos
+            </button>
+
+            <button
+              className={tipoAgendamento === "seus" ? "agendamento-ativo2" : ""}
+              onClick={() => setTipoAgendamento("seus")}
+            >
+              Seus Agendamentos
+            </button>
+          </div>
         </p>
 
         <div className="filtros">
-
           <span>Filtrar por status:</span>
 
           <div className="botoes">
-
             <button
               className={filtroAtivo === "todos" ? "ativo" : ""}
               onClick={() => handleFiltro("todos")}
@@ -221,70 +222,65 @@ function Historico() {
             </button>
 
             <button
-              className={filtroAtivo === "aguardando" ? "ativo" : ""}
-              onClick={() => handleFiltro("aguardando")}
+              className={filtroAtivo === "Aguardando" ? "ativo" : ""}
+              onClick={() => handleFiltro("Aguardando")}
             >
-              Aguardando
+              Aguardando <br></br> Confirmação
             </button>
 
             <button
-              className={filtroAtivo === "confirmados" ? "ativo" : ""}
-              onClick={() => handleFiltro("confirmados")}
+              className={filtroAtivo === "Confirmado" ? "ativo" : ""}
+              onClick={() => handleFiltro("Confirmado")}
             >
               Confirmados
             </button>
 
             <button
-              className={filtroAtivo === "realizados" ? "ativo" : ""}
-              onClick={() => handleFiltro("realizados")}
+              className={filtroAtivo === "Realizado" ? "ativo" : ""}
+              onClick={() => handleFiltro("Realizado")}
             >
               Realizados
             </button>
 
             <button
-              className={filtroAtivo === "recusados" ? "ativo" : ""}
-              onClick={() => handleFiltro("recusados")}
+              className={filtroAtivo === "Recusado" ? "ativo" : ""}
+              onClick={() => handleFiltro("Recusado")}
             >
               Recusados
             </button>
 
             <button
-              className={filtroAtivo === "cancelados" ? "ativo" : ""}
-              onClick={() => handleFiltro("cancelados")}
+              className={filtroAtivo === "Cancelado" ? "ativo" : ""}
+              onClick={() => handleFiltro("Cancelado")}
             >
               Cancelados
             </button>
-
           </div>
-
         </div>
 
         <div className="cards">
-
           {agendamentosFiltrados.map((agendamento) => (
-
-            <Card
-              key={agendamento.id}
-              tamanho={"400px"}
-            >
-
+            <Card key={agendamento.id} tamanho={"400px"}>
               <CardTitulo>
-
-                <h3>{agendamento.profissional}</h3>
+                <h3>
+                  {tipoAgendamento === "meus"
+                    ? agendamento?.usuario?.nome
+                    : agendamento?.usuario_agendamento[0]?.usuario?.nome}
+                </h3>
 
                 <Selo
                   cor={getStatusColor(agendamento.status)}
-                  texto={agendamento.status}
+                  texto={getStatusTexto(agendamento.status)}
                 />
-
               </CardTitulo>
 
               <p>
-                <strong>Data:</strong> {agendamento.data}
+                <strong>Data:</strong>{" "}
+                {agendamento.data_agendamento.split("-").reverse().join("/")}
               </p>
 
               <p>
-                <strong>Hora:</strong> {agendamento.hora}
+                <strong>Hora:</strong> {agendamento.horario.slice(0, 5)}
               </p>
 
               <p>
@@ -292,71 +288,76 @@ function Historico() {
               </p>
 
               <div className="card-footer">
+                {agendamento.status === "Aguardando" ? (
+                  <>
+                    {tipoAgendamento === "seus" ? (
+                      <>
+                        <button
+                          className="btn-confirmar"
+                          onClick={() => confirmarAgendamento(agendamento.id)}
+                        >
+                          Confirmar
+                        </button>
 
-                {agendamento.status === "aguardando" ? (
-
+                        <button
+                          className="btn-recusar"
+                          onClick={() => recusarAgendamento(agendamento.id)}
+                        >
+                          Recusar
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        className="btn-cancelar"
+                        onClick={() => cancelarAgendamento(agendamento.id)}
+                      >
+                        Cancelar
+                      </button>
+                    )}
+                  </>
+                ) : agendamento.status === "Confirmado" ? (
                   <>
                     <button
-                      className="btn-confirmar"
-                      onClick={() =>
-                        confirmarAgendamento(agendamento.id)
-                      }
+                      className="btn-cancelar"
+                      onClick={() => cancelarAgendamento(agendamento.id)}
                     >
-                      Confirmar
+                      Cancelar
                     </button>
 
-                    <button
-                      className="btn-recusar"
-                      onClick={() =>
-                        recusarAgendamento(agendamento.id)
-                      }
-                    >
-                      Recusar
-                    </button>
+                    {tipoAgendamento === "meus" ? (
+                      <button
+                        className="btn-editar"
+                        onClick={() =>
+                          navigate(`/agendamento/${agendamento.id}`)
+                        }
+                      >
+                        ✎ Editar
+                      </button>
+                    ) : (
+                      <></>
+                    )}
                   </>
-
-                ) : agendamento.status === "confirmados" ? (
-
+                ) : agendamento.status === "Recusado" ||
+                  agendamento.status === "Cancelado" ? (
                   <button
-                    className="btn-cancelar"
-                    onClick={() =>
-                      cancelarAgendamento(agendamento.id)
-                    }
+                    className="btn-excluir"
+                    onClick={() => excluirAgendamento(agendamento.id)}
                   >
-                    Cancelar
+                    🚮 Excluir
                   </button>
-
                 ) : (
-
-                  <button
-                    className="btn-cancelar"
-                    onClick={() =>
-                      excluirAgendamento(agendamento.id)
-                    }
-                  >
-                    🗑 Excluir
-                  </button>
-
+                  <></>
                 )}
-
               </div>
-
             </Card>
-
           ))}
-
         </div>
 
         {agendamentosFiltrados.length === 0 && (
-
           <div className="empty-state">
-            <p>
-              Nenhum agendamento encontrado para este filtro.
-            </p>
+            <p>Nenhum agendamento encontrado para este filtro.</p>
           </div>
-
         )}
-
       </div>
 
       {modalAberto && (
@@ -379,16 +380,11 @@ function Historico() {
                 Sim
               </button>
 
-              <button
-                onClick={() => setModalAberto(false)}
-              >
-                Não
-              </button>
+              <button onClick={() => setModalAberto(false)}>Não</button>
             </div>
           </div>
         </div>
       )}
-
     </Layout>
   );
 }

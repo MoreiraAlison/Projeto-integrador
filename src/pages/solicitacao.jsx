@@ -13,17 +13,19 @@ function Solicitacao() {
 
     if (!dados) {
       navigate("/login");
-    } else {
-      setUsuario(dados);
+      return;
     }
+
+    setUsuario(dados);
 
     const agend = JSON.parse(localStorage.getItem("agendamento"));
 
     if (!agend) {
       navigate("/agendamento");
-    } else {
-      setAgendamento(agend);
+      return;
     }
+
+    setAgendamento(agend);
   }, [navigate]);
 
   const handleLogout = () => {
@@ -41,13 +43,15 @@ function Solicitacao() {
     if (!data) return "-";
 
     try {
-      const dataObj = new Date(data);
+      const [ano, mes, dia] = String(data).slice(0, 10).split("-").map(Number);
+
+      const dataObj = new Date(ano, mes - 1, dia);
 
       const opcoes = {
         weekday: "long",
         year: "numeric",
         month: "long",
-        day: "numeric"
+        day: "numeric",
       };
 
       return dataObj.toLocaleDateString("pt-BR", opcoes);
@@ -60,7 +64,7 @@ function Solicitacao() {
     if (!hora) return "-";
 
     try {
-      const [h, m] = hora.split(":");
+      const [h, m] = String(hora).split(":");
 
       let horaInt = parseInt(h, 10);
 
@@ -78,6 +82,18 @@ function Solicitacao() {
     return null;
   }
 
+  // Aceita tanto o retorno da API diretamente
+  // quanto o retorno dentro da propriedade agendamento.
+  const dadosAgendamento = agendamento.agendamento || agendamento;
+
+  const ehProfissional = usuario.tipo_usuario?.tipo === "Profissional";
+
+  const dataAgendamento = dadosAgendamento.data_agendamento || agendamento.data;
+
+  const horaAgendamento = dadosAgendamento.horario || agendamento.hora;
+
+  const motivoAgendamento = dadosAgendamento.motivo || agendamento.motivo;
+
   return (
     <Layout
       usuario={usuario}
@@ -85,27 +101,23 @@ function Solicitacao() {
       onNotifications={handleNotifications}
     >
       <div className="solicitacao-content">
-
         <div className="icon-check">
           <i className="fa-solid fa-circle-check"></i>
         </div>
 
         <h2>
-          {usuario.tipo === "profissional"
-            ? "Solicitação Respondida!"
-            : "Solicitação Enviada!"}
+          {ehProfissional ? "Solicitação Respondida!" : "Solicitação Enviada!"}
         </h2>
 
         <p className="subtitulo">
-          {usuario.tipo === "profissional"
+          {ehProfissional
             ? "A resposta da solicitação foi enviada com sucesso."
             : "Sua solicitação de agendamento foi enviada. Aguarde a confirmação do profissional."}
         </p>
 
         <div className="card-detalhes">
-
           <div className="titulo-card">
-            {usuario.tipo === "profissional"
+            {ehProfissional
               ? "Detalhes da solicitação"
               : "Detalhes do agendamento"}
           </div>
@@ -117,8 +129,6 @@ function Solicitacao() {
               <strong>Profissional</strong>
               <br />
               <span>{agendamento.profissional || "-"}</span>
-              <br />
-              <small>-</small>
             </div>
           </div>
 
@@ -128,7 +138,7 @@ function Solicitacao() {
             <div>
               <strong>Data</strong>
               <br />
-              <span>{formatarData(agendamento.data)}</span>
+              <span>{formatarData(dataAgendamento)}</span>
             </div>
           </div>
 
@@ -138,7 +148,7 @@ function Solicitacao() {
             <div>
               <strong>Hora</strong>
               <br />
-              <span>{formatarHora(agendamento.hora)}</span>
+              <span>{formatarHora(horaAgendamento)}</span>
             </div>
           </div>
 
@@ -148,16 +158,13 @@ function Solicitacao() {
             <div>
               <strong>Motivo</strong>
               <br />
-              <span>{agendamento.motivo || "-"}</span>
+              <span>{motivoAgendamento || "-"}</span>
             </div>
           </div>
         </div>
 
         <div className="botoes">
-          <button
-            className="btn-voltar"
-            onClick={() => navigate("/inicio")}
-          >
+          <button className="btn-voltar" onClick={() => navigate("/inicio")}>
             Voltar ao Início
           </button>
 
@@ -168,7 +175,6 @@ function Solicitacao() {
             Ver Agendamentos
           </button>
         </div>
-
       </div>
     </Layout>
   );

@@ -1,16 +1,41 @@
-# React + Vite
+# Agende+ — Backend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Backend adaptado do projeto-base para o sistema Agende+ da Marista Escola Social Cascavel.
 
-Currently, two official plugins are available:
+## Estrutura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A estrutura original do backend foi mantida: `src/modelos`, `src/controladores`, `src/rotas`, `src/database.js`, `src/app.js` e `server.js`.
 
-## React Compiler
+Os recursos de biblioteca foram substituídos pelos recursos do Agende+: usuários, alunos, profissionais, agendamentos, disponibilidade e notificações.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Banco de dados
 
-## Expanding the ESLint configuration
+O projeto usa **Supabase (PostgreSQL)**. Execute primeiro `supabase/schema.sql` no SQL Editor do Supabase e, se quiser dados de teste, depois `supabase/seed.sql`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Configuração
+
+Copie `.env.example` para `.env` e preencha:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+A `SERVICE_ROLE_KEY` fica somente no backend. Não coloque essa chave no React.
+
+## Executar
+
+```bash
+npm install
+npm run dev
+```
+
+API: `http://localhost:3000`
+
+## Rotas principais
+
+- `POST /usuarios/login`
+- `GET/POST/PUT/DELETE /usuarios`
+- `GET/POST/PUT/DELETE /alunos`
+- `GET/POST/PUT/DELETE /profissionais`
+- `GET/POST/PUT/DELETE /agendamentos`
+- `GET/POST/PUT/DELETE /disponibilidade`
+- `GET/POST /notificacoes`

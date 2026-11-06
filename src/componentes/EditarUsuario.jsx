@@ -5,47 +5,74 @@ export default function EditarUsuario({
   aberto,
   fechar,
   usuario,
-  salvarUsuario
+  salvarUsuario,
 }) {
-
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [tipo, setTipo] = useState("");
   const [cargo, setCargo] = useState("");
 
   useEffect(() => {
+    if (!usuario) return;
 
-    if (usuario) {
+    setNome(usuario.nome || "");
+    setEmail(usuario.email || "");
 
-      setNome(usuario.nome);
-      setEmail(usuario.email);
-      setTipo(usuario.tipo);
-      setCargo(usuario.cargo || "");
+    const tipoUsuario = usuario.tipo_usuario?.tipo || usuario.tipo || "";
 
-    }
+    setTipo(tipoUsuario);
 
+    setCargo(usuario.funcao || "");
   }, [usuario]);
 
-  if (!aberto || !usuario) return null;
+  if (!aberto || !usuario) {
+    return null;
+  }
 
-  const handleSalvar = () => {
+  const handleTipoChange = (e) => {
+    const novoTipo = e.target.value;
 
-    salvarUsuario({
-      ...usuario,
-      nome,
-      email,
-      tipo,
-      cargo
-    });
+    setTipo(novoTipo);
 
-    fechar();
+    if (novoTipo !== "Profissional") {
+      setCargo("");
+    }
+  };
+
+  const handleSalvar = async () => {
+    if (!nome.trim() || !email.trim()) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    if (!tipo) {
+      alert("Selecione o tipo de usuário!");
+      return;
+    }
+
+    if (tipo === "Profissional" && !cargo.trim()) {
+      alert("Informe a função do profissional!");
+      return;
+    }
+
+    const usuarioAtualizado = {
+      id: usuario.id,
+      nome: nome.trim(),
+      email: email.trim(),
+      tipo: tipo,
+      funcao: tipo === "Profissional" ? cargo.trim() : null,
+    };
+
+    try {
+      await salvarUsuario(usuarioAtualizado);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="modal-overlay">
-
       <div className="modal-container">
-
         <h2>Editar Usuário</h2>
 
         <div className="campo">
@@ -71,51 +98,38 @@ export default function EditarUsuario({
         <div className="campo">
           <label>Tipo</label>
 
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          >
+          <select value={tipo} onChange={handleTipoChange}>
             <option value="Aluno">Aluno</option>
+
             <option value="Responsável">Responsável</option>
+
             <option value="Profissional">Profissional</option>
           </select>
         </div>
 
         {tipo === "Profissional" && (
           <div className="campo">
-
-            <label>Cargo/Função</label>
+            <label>Função na escola</label>
 
             <input
               type="text"
+              placeholder="Professor(a), Coordenador(a), Diretor(a)..."
               value={cargo}
-              placeholder="Professor(a), Coordenador(a)..."
               onChange={(e) => setCargo(e.target.value)}
             />
-
           </div>
         )}
 
         <div className="modal-botoes">
-
-          <button
-            className="cancelar"
-            onClick={fechar}
-          >
+          <button className="cancelar" onClick={fechar}>
             Cancelar
           </button>
 
-          <button
-            className="confirmar"
-            onClick={handleSalvar}
-          >
+          <button className="confirmar" onClick={handleSalvar}>
             Salvar
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }

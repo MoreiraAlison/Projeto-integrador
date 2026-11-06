@@ -1,129 +1,176 @@
+/* CONFIGURAÇÕES GERAIS */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background: #f4f4f4;
+  background: #f4f4f4;
 }
 
-/* CONTEÚDO */
+/* CONTEÚDO PRINCIPAL */
 
 .inicio-content {
-    text-align: center;
-    padding: 40px 20px;
-    flex: 1;
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
 }
 
 .inicio-content h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #1f4568;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #1f4568;
 }
 
 .subtitle {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 40px;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 40px;
 }
 
 /* CARDS */
 
-.cards {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+.inicio-content .cards {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
 }
 
-.card {
-    background: #eaeaea;
-    width: 320px;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
-    cursor: pointer;
-    transition: 0.3s;
+/* ESTILO INDIVIDUAL DOS CARDS */
+
+.inicio-content .cards > .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  flex: 0 0 300px;
+  width: 300px;
+  min-width: 300px;
+  height: 260px;
+  padding: 30px;
+
+  background: #eaeaea;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+.inicio-content .cards > .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card h3 {
-    margin: 15px 0 10px;
-    color: #1f4568;
+/* TEXTOS DOS CARDS */
+
+.inicio-content .cards > .card h3 {
+  margin: 15px 0 10px;
+  color: #1f4568;
 }
 
-.card p {
-    font-size: 16px;
-    color: #555;
+.inicio-content .cards > .card p {
+  font-size: 16px;
+  color: #555;
 }
+
+/* ÍCONES */
 
 .icon {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .blue {
-    color: #4a90e2;
+  color: #4a90e2;
 }
 
 .purple {
-    color: #8423C5;
+  color: #8423c5;
 }
 
-/* ===== PROFISSIONAL ===== */
+/* MINHA AGENDA */
+
+.inicio-content .cards > .card-agenda {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CONTAINER PROFISSIONAL */
 
 .profissional-container {
-    width: 100%;
-    padding: 55px 50px;
+  width: 100%;
+  padding: 55px 50px;
 }
 
 .profissional-buttons {
-    display: flex;
-    align-items: center;
-    gap: 45px;
+  display: flex;
+  align-items: center;
+  gap: 45px;
 }
 
 .btn-agendamentos {
-    border: none;
-    background: #55b9eb;
-    color: white;
-    font-size: 20px;
-    padding: 18px 35px;
-    border-radius: 24px;
-    cursor: pointer;
-    font-weight: 500;
+  border: none;
+  background: #55b9eb;
+  color: white;
+  font-size: 20px;
+  padding: 18px 35px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .btn-criar {
-    border: none;
-    background: #dfdfdf;
-    color: black;
-    font-size: 20px;
-    padding: 18px 35px;
-    border-radius: 24px;
-    cursor: pointer;
+  border: none;
+  background: #dfdfdf;
+  color: black;
+  font-size: 20px;
+  padding: 18px 35px;
+  border-radius: 24px;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .btn-criar i {
-    font-size: 34px;
+  font-size: 34px;
 }
 
-/* FOOTER */
+/* RODAPÉ */
 
 footer {
-    text-align: center;
-    background: #ddd;
-    padding: 15px;
-    font-size: 12px;
+  text-align: center;
+  background: #ddd;
+  padding: 15px;
+  font-size: 12px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 680px) {
+  .inicio-content .cards {
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+  }
+
+  .inicio-content .cards > .card {
+    width: 100%;
+    max-width: 320px;
+    min-width: 0;
+    flex-basis: 260px;
+  }
 }

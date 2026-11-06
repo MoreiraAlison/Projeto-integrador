@@ -5,15 +5,9 @@ import BotaoLogin from "../componentes/BotaoLogin";
 
 import logo from "../assets/logo-login.png";
 import Carregando from "../componentes/Carregando";
-
-// Banco de dados fake
-const usuarios = [
-  { email: "alison@agende.com", senha: "123", tipo: "aluno", nome: "Alison Moreira" },
-  { email: "rivani@agende.com", senha: "123", tipo: "responsavel", nome: "Rivani Silva" },
-  { email: "maria.julia@agende.com", senha: "123", tipo: "profissional", nome: "Maria Júlia", cargo: "Professor(a)" },
-  { email: "joao@agende.com", senha: "123", tipo: "profissional", nome: "João Pedro", cargo: "Coordenador(a)" },
-  { email: "ana@agende.com", senha: "123", tipo: "profissional", nome: "Ana Souza", cargo: "Diretor(a)" }
-];
+import { api } from "../services/api";
+import usuarioAPI from "../api/usuario";
+import { useAutenticador } from "../context/AutenticadorContexto";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,43 +16,30 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const { login } = useAutenticador();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuarioEncontrado = usuarios.find(u =>
-      u.email === email &&
-      u.senha === senha &&
-      u.tipo === tipoUsuario
-    );
+    try {
+      const usuarioLogado = await usuarioAPI.login({ email, senha });
 
-    if (usuarioEncontrado) {
-      if (usuarioEncontrado.tipo === "profissional" && !usuarioEncontrado.cargo) {
-        usuarioEncontrado.cargo = "Profissional";
-      }
-
-      localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
-      console.log("Usuário logado:", usuarioEncontrado);
+      login(usuarioLogado);
 
       setLoading(true);
 
       setTimeout(() => {
         navigate("/inicio");
       }, 1500);
-    } else {
-      alert("Email ou senha incorretos!");
+    } catch (error) {
+      alert(error.message);
     }
   };
 
   return (
     <div className="login-container">
-
       <div className="top-logo">
-        <img
-          src={logo}
-          alt="Logo Marista"
-          width={"306px"}
-          height={"107px"}
-        />
+        <img src={logo} alt="Logo Marista" width={"306px"} height={"107px"} />
       </div>
 
       <div className="purple-circle"></div>
@@ -156,9 +137,7 @@ function Login() {
         </div>
       </form>
 
-      {loading && (
-        <Carregando mensagem="Acessando o site..." />
-      )}
+      {loading && <Carregando mensagem="Acessando o site..." />}
     </div>
   );
 }
