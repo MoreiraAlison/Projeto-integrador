@@ -1,0 +1,139 @@
+.notificacoes-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.notificacoes-botao {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificacoes-botao i {
+  font-size: 20px;
+}
+
+.notificacoes-contador {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 10px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificacoes-painel {
+  position: absolute;
+  top: 38px;
+  right: 0;
+  width: 360px;
+  max-height: 480px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+  color: #222;
+}
+
+.notificacoes-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notificacoes-cabecalho h3 {
+  margin: 0;
+  color: #173f6c;
+  font-size: 18px;
+}
+
+.notificacoes-cabecalho button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.notificacoes-lista {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.notificacao-item {
+  display: flex;
+  gap: 12px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background: white;
+}
+
+.notificacao-item.nao-lida {
+  background: #f1f7ff;
+}
+
+.notificacao-icone {
+  width: 35px;
+  height: 35px;
+  min-width: 35px;
+  border-radius: 50%;
+  background: #012c58;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificacao-conteudo {
+  flex: 1;
+}
+
+.notificacao-conteudo strong {
+  display: block;
+  color: #173f6c;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.notificacao-conteudo p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.notificacao-conteudo small {
+  color: #777;
+  font-size: 11px;
+}
+
+.notificacoes-vazio {
+  padding: 35px 20px;
+  text-align: center;
+  color: #777;
+}
+
+.notificacoes-vazio i {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.notificacoes-vazio p {
+  margin: 5px 0 0;
+}

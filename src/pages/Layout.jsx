@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./layout.css";
 
 import logo from "../assets/logo4.png";
+import Notificacoes from "../componentes/notificacoes";
 
 function Layout({
   children,
@@ -26,20 +27,17 @@ function Layout({
       <aside className={`sidebar ${menuAberto ? "open" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} alt="Logo" />
-
           <h2>Agende+</h2>
         </div>
 
         <nav>
           <Link to={paginaInicial} onClick={() => setMenuAberto(false)}>
             <i className="fa-solid fa-house"></i>
-
             <span>Início</span>
           </Link>
 
           <Link to="/sobre" onClick={() => setMenuAberto(false)}>
             <i className="fa-solid fa-circle-info"></i>
-
             <span>Sobre</span>
           </Link>
         </nav>
@@ -53,7 +51,13 @@ function Layout({
       <header className="topbar">
         <div className="logo-area">
           <div className="top-logo-inicio">
-            <Link to={paginaInicial}>
+            <Link
+              to={
+                usuario?.tipo_usuario?.tipo === "Administrador"
+                  ? ""
+                  : paginaInicial
+              }
+            >
               <img src={logo} alt="Logo" />
             </Link>
           </div>
@@ -62,7 +66,7 @@ function Layout({
         <h1>Marista Escola Social Cascavel</h1>
 
         <div className="user-area">
-          <i className="fa-solid fa-bell" onClick={onNotifications}></i>
+          <Notificacoes usuario={usuario} />
 
           <div className="user-info">
             <span className="name">{usuario?.nome}</span>

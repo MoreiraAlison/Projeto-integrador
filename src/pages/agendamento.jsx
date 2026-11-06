@@ -102,6 +102,13 @@ function Agendamento() {
           listaPessoas = await api.profissionais();
         }
 
+        // Ordena todos os usuários pelo nome em ordem alfabética
+        listaPessoas.sort((a, b) =>
+          String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR", {
+            sensitivity: "base",
+          }),
+        );
+
         setProfissionais(listaPessoas);
 
         if (id) {
@@ -120,7 +127,6 @@ function Agendamento() {
 
             if (responsavel) {
               setProfissionalSelecionado(responsavel);
-
               setPesquisaPessoa(responsavel.nome || "");
             }
 
@@ -143,7 +149,6 @@ function Agendamento() {
 
             if (profissional) {
               setProfissionalSelecionado(profissional);
-
               setPesquisaPessoa(profissional.nome || "");
             }
 
@@ -429,11 +434,7 @@ function Agendamento() {
   }
 
   return (
-    <Layout
-      usuario={usuario}
-      onLogout={handleLogout}
-      onNotifications={() => alert("Notificações")}
-    >
+    <Layout usuario={usuario} onLogout={handleLogout}>
       <div className="agendamento-content">
         <div className="voltar-container">
           <button className="voltar" onClick={() => navigate("/inicio")}>

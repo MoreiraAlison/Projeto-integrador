@@ -9,10 +9,16 @@ async function requisicao(endpoint, opcoes = {}) {
     ...opcoes,
   });
 
-  if (resposta.status === 204) return null;
+  if (resposta.status === 204) {
+    return null;
+  }
 
   const dados = await resposta.json();
-  if (!resposta.ok) throw new Error(dados.erro || "Erro na requisição");
+
+  if (!resposta.ok) {
+    throw new Error(dados.erro || dados.mensagem || "Erro na requisição");
+  }
+
   return dados;
 }
 
@@ -26,7 +32,10 @@ export const api = {
   usuarios: () => requisicao("/usuarios"),
 
   criarUsuario: (dados) =>
-    requisicao("/usuarios", { method: "POST", body: JSON.stringify(dados) }),
+    requisicao("/usuarios", {
+      method: "POST",
+      body: JSON.stringify(dados),
+    }),
 
   atualizarUsuario: (id, dados) =>
     requisicao(`/usuarios/${id}`, {
@@ -34,7 +43,11 @@ export const api = {
       body: JSON.stringify(dados),
     }),
 
-  excluirUsuario: (id) => requisicao(`/usuarios/${id}`, { method: "DELETE" }),
+  excluirUsuario: (id) =>
+    requisicao(`/usuarios/${id}`, {
+      method: "DELETE",
+    }),
+
   alunos: () => requisicao("/alunos"),
 
   alunosPorResponsavel: (id) => requisicao(`/alunos/responsavel/${id}`),
@@ -56,6 +69,7 @@ export const api = {
     }),
 
   agendamentosPorUsuario: (id) => requisicao(`/agendamentos/usuario/${id}`),
+
   agendamentosRecebido: (id) =>
     requisicao(`/agendamentos/usuario/recebido/${id}`),
 
@@ -95,7 +109,14 @@ export const api = {
     }),
 
   excluirAgendamento: (id) =>
-    requisicao(`/agendamentos/${id}`, { method: "DELETE" }),
+    requisicao(`/agendamentos/${id}`, {
+      method: "DELETE",
+    }),
 
   notificacoes: (id) => requisicao(`/notificacoes/${id}`),
+
+  marcarNotificacaoComoLida: (id) =>
+    requisicao(`/notificacoes/${id}/lida`, {
+      method: "PUT",
+    }),
 };

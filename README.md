@@ -1,41 +1,30 @@
-# Agende+ — Backend
+# Agende+ — Marista Escola Social Cascavel
 
-Backend adaptado do projeto-base para o sistema Agende+ da Marista Escola Social Cascavel.
+Sistema de agendamento do Projeto Integrador.
 
-## Estrutura
+## Tecnologias
 
-A estrutura original do backend foi mantida: `src/modelos`, `src/controladores`, `src/rotas`, `src/database.js`, `src/app.js` e `server.js`.
+- React
+- JavaScript
+- CSS
+- Node.js + Express
+- Supabase (PostgreSQL)
 
-Os recursos de biblioteca foram substituídos pelos recursos do Agende+: usuários, alunos, profissionais, agendamentos, disponibilidade e notificações.
+## Front-end
 
-## Banco de dados
+O front-end continua com a mesma estrutura de páginas, componentes e estilos. Foi adicionada apenas a pasta `src/services` para centralizar as chamadas à API.
 
-O projeto usa **Supabase (PostgreSQL)**. Execute primeiro `supabase/schema.sql` no SQL Editor do Supabase e, se quiser dados de teste, depois `supabase/seed.sql`.
+Crie um arquivo `.env` a partir de `.env.example`:
 
-## Configuração
+```env
+VITE_API_URL=http://localhost:3000
+```
 
-Copie `.env.example` para `.env` e preencha:
-
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-
-A `SERVICE_ROLE_KEY` fica somente no backend. Não coloque essa chave no React.
-
-## Executar
+Execute:
 
 ```bash
 npm install
 npm run dev
 ```
 
-API: `http://localhost:3000`
-
-## Rotas principais
-
-- `POST /usuarios/login`
-- `GET/POST/PUT/DELETE /usuarios`
-- `GET/POST/PUT/DELETE /alunos`
-- `GET/POST/PUT/DELETE /profissionais`
-- `GET/POST/PUT/DELETE /agendamentos`
-- `GET/POST/PUT/DELETE /disponibilidade`
-- `GET/POST /notificacoes`
+O backend correspondente está na pasta `backend-agende+`.
