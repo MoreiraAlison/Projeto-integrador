@@ -5,9 +5,44 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   transition: 0.3s;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 10px;
+    border-radius: 10px;
+  }
 }
