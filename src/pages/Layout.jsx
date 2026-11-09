@@ -63,7 +63,7 @@ function Layout({
           </div>
         </div>
 
-        <h1>Marista Escola Social Cascavel</h1>
+        <h1></h1>
 
         <div className="user-area">
           <Notificacoes usuario={usuario} />
