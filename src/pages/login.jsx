@@ -5,7 +5,6 @@ import BotaoLogin from "../componentes/BotaoLogin";
 
 import logo from "../assets/logo-login.png";
 import Carregando from "../componentes/Carregando";
-import { api } from "../services/api";
 import usuarioAPI from "../api/usuario";
 import { useAutenticador } from "../context/AutenticadorContexto";
 
@@ -22,8 +21,33 @@ function Login() {
     e.preventDefault();
 
     try {
-      const usuarioLogado = await usuarioAPI.login({ email, senha });
+      const usuarioLogado = await usuarioAPI.login({
+        email,
+        senha,
+      });
 
+      // Tipo escolhido na tela
+      const tiposPermitidos = {
+        aluno: "Aluno",
+        responsavel: "Responsável",
+        profissional: "Profissional",
+      };
+
+      const tipoSelecionado = tiposPermitidos[tipoUsuario];
+
+      // Tipo real do usuário vindo do banco
+      const tipoBanco = usuarioLogado?.tipo_usuario?.tipo;
+
+      // Verifica se o tipo selecionado corresponde ao usuário
+      if (tipoBanco !== tipoSelecionado) {
+        alert(
+          `Este e-mail pertence a um usuário do tipo "${tipoBanco}". Selecione a opção correta para entrar.`,
+        );
+
+        return;
+      }
+
+      // Só faz login se o tipo estiver correto
       login(usuarioLogado);
 
       setLoading(true);
