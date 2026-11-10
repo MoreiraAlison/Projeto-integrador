@@ -13,6 +13,7 @@ function Layout({
   esconderTipo = false,
 }) {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [contadorNotificacoes, setContadorNotificacoes] = useState(0);
 
   const paginaInicial = "/inicio";
 
@@ -27,7 +28,6 @@ function Layout({
       <aside className={`sidebar ${menuAberto ? "open" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} alt="Logo" />
-          <h2>Agende+</h2>
         </div>
 
         <nav>
@@ -40,11 +40,18 @@ function Layout({
             <i className="fa-solid fa-circle-info"></i>
             <span>Sobre</span>
           </Link>
+
+          <div className="sidebar-notificacoes">
+            <Notificacoes
+              usuario={usuario}
+              onContadorChange={setContadorNotificacoes}
+            />
+          </div>
         </nav>
 
         <button className="sidebar-logout" onClick={onLogout}>
           <i className="fa-solid fa-arrow-right-from-bracket"></i>
-          Sair
+          <span>Sair</span>
         </button>
       </aside>
 
@@ -63,11 +70,9 @@ function Layout({
           </div>
         </div>
 
-        <h1></h1>
+        <h1>Marista Escola Social Cascavel</h1>
 
         <div className="user-area">
-          <Notificacoes usuario={usuario} />
-
           <div className="user-info">
             <span className="name">{usuario?.nome}</span>
 
@@ -84,8 +89,18 @@ function Layout({
             )}
           </div>
 
-          <button className="menu-btn" onClick={() => setMenuAberto(true)}>
+          <button
+            className="menu-btn"
+            onClick={() => setMenuAberto(true)}
+            aria-label="Abrir menu"
+          >
             <i className="fa-solid fa-bars"></i>
+
+            {contadorNotificacoes > 0 && (
+              <span className="menu-notificacao-contador">
+                {contadorNotificacoes > 99 ? "99+" : contadorNotificacoes}
+              </span>
+            )}
           </button>
         </div>
       </header>
