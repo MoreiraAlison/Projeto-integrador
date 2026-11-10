@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../services/api";
 import "./notificacoes.css";
 
-export default function Notificacoes({ usuario }) {
+export default function Notificacoes({ usuario, onContadorChange }) {
   const [aberto, setAberto] = useState(false);
   const [notificacoes, setNotificacoes] = useState([]);
   const [carregando, setCarregando] = useState(false);
@@ -34,6 +34,12 @@ export default function Notificacoes({ usuario }) {
   const naoLidas = notificacoes.filter(
     (notificacao) => !notificacao.lida,
   ).length;
+
+  useEffect(() => {
+    if (onContadorChange) {
+      onContadorChange(naoLidas);
+    }
+  }, [naoLidas, onContadorChange]);
 
   const abrirNotificacoes = async () => {
     const vaiAbrir = !aberto;
@@ -92,6 +98,8 @@ export default function Notificacoes({ usuario }) {
         aria-label="Notificações"
       >
         <i className="fa-solid fa-bell"></i>
+
+        <span className="notificacoes-texto">Notificações</span>
 
         {naoLidas > 0 && (
           <span className="notificacoes-contador">
