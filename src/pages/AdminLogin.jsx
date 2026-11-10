@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useAsyncValue, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 import logo from "../assets/logo-login.png";
 import BotaoLogin from "../componentes/BotaoLogin";
 import Carregando from "../componentes/Carregando";
-import { api } from "../services/api";
 import usuarioAPI from "../api/usuario";
 import { useAutenticador } from "../context/AutenticadorContexto";
 
@@ -20,8 +19,25 @@ function AdminLogin() {
 
   const handleSubmit = async () => {
     try {
-      const usuario = await usuarioAPI.login({ email, senha });
+      const usuario = await usuarioAPI.login({
+        email,
+        senha,
+      });
+
+      // Pega o tipo real do usuário vindo do banco
+      const tipoBanco = usuario?.tipo_usuario?.tipo;
+
+      // Só permite Administrador
+      if (tipoBanco !== "Administrador") {
+        alert(
+          "Acesso negado. Esta área é exclusiva para usuários Administradores."
+        );
+        return;
+      }
+
+      // Só faz login se for Administrador
       login(usuario);
+
       setLoading(true);
 
       setTimeout(() => {
@@ -35,7 +51,12 @@ function AdminLogin() {
   return (
     <div className="login-container">
       <div className="top-logo">
-        <img src={logo} alt="Logo Marista" width={"306px"} height={"107px"} />
+        <img
+          src={logo}
+          alt="Logo Marista"
+          width={"306px"}
+          height={"107px"}
+        />
       </div>
 
       <div className="purple-circle"></div>
@@ -116,7 +137,9 @@ function AdminLogin() {
         </div>
       </div>
 
-      {loading && <Carregando mensagem="Acessando painel administrativo..." />}
+      {loading && (
+        <Carregando mensagem="Acessando painel administrativo..." />
+      )}
     </div>
   );
 }
