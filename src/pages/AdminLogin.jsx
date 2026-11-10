@@ -1,59 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAsyncValue, useNavigate } from "react-router-dom";
 import "./login.css";
-import BotaoLogin from "../componentes/BotaoLogin";
-
 import logo from "../assets/logo-login.png";
+import BotaoLogin from "../componentes/BotaoLogin";
 import Carregando from "../componentes/Carregando";
+import { api } from "../services/api";
 import usuarioAPI from "../api/usuario";
 import { useAutenticador } from "../context/AutenticadorContexto";
 
-function Login() {
+function AdminLogin() {
+  const navigate = useNavigate();
+
+  const [tipoUsuario, setTipoUsuario] = useState("admin");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState("aluno");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const { login } = useAutenticador();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
-      const usuarioLogado = await usuarioAPI.login({
-        email,
-        senha,
-      });
-
-      // Tipo escolhido na tela
-      const tiposPermitidos = {
-        aluno: "Aluno",
-        responsavel: "Responsável",
-        profissional: "Profissional",
-      };
-
-      const tipoSelecionado = tiposPermitidos[tipoUsuario];
-
-      // Tipo real do usuário vindo do banco
-      const tipoBanco = usuarioLogado?.tipo_usuario?.tipo;
-
-      // Verifica se o tipo selecionado corresponde ao usuário
-      if (tipoBanco !== tipoSelecionado) {
-        alert(
-          `Este e-mail pertence a um usuário do tipo "${tipoBanco}". Selecione a opção correta para entrar.`,
-        );
-
-        return;
-      }
-
-      // Só faz login se o tipo estiver correto
-      login(usuarioLogado);
-
+      const usuario = await usuarioAPI.login({ email, senha });
+      login(usuario);
       setLoading(true);
 
       setTimeout(() => {
-        navigate("/inicio");
+        navigate("/admin");
       }, 1500);
     } catch (error) {
       alert(error.message);
@@ -71,99 +43,82 @@ function Login() {
       <div className="red-shape"></div>
       <div className="yellow-star"></div>
 
-      <form id="formLogin" onSubmit={handleSubmit}>
-        <div className="container">
-          <div className="login-box">
-            <h1>Entrar</h1>
-            <p className="subtitle">Acesse sua conta</p>
-
-            <div className="user-type">
-              <span>Tipo de Usuário</span>
-
-              <div className="buttons">
-                <BotaoLogin
-                  tipoBotao={"aluno"}
-                  aoClicar={() => setTipoUsuario("aluno")}
-                  ativo={tipoUsuario === "aluno"}
-                >
-                  <i className="fa-solid fa-user"></i>
-                  Aluno
-                </BotaoLogin>
-
-                <BotaoLogin
-                  tipoBotao={"responsavel"}
-                  aoClicar={() => setTipoUsuario("responsavel")}
-                  ativo={tipoUsuario === "responsavel"}
-                >
-                  <i className="fa-solid fa-users"></i>
-                  Responsável
-                </BotaoLogin>
-
-                <BotaoLogin
-                  tipoBotao={"profissional"}
-                  aoClicar={() => setTipoUsuario("profissional")}
-                  ativo={tipoUsuario === "profissional"}
-                >
-                  <i className="fa-solid fa-briefcase"></i>
-                  Profissional
-                </BotaoLogin>
-              </div>
-            </div>
-
-            <div className="input-group">
-              <label>E-mail</label>
-
-              <div className="input-icon">
-                <i className="fa-solid fa-envelope"></i>
-
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="aluno@agende.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="input-group">
-              <label>Senha</label>
-
-              <div className="input-icon">
-                <i className="fa-solid fa-lock"></i>
-
-                <input
-                  type="password"
-                  id="senha"
-                  name="senha"
-                  placeholder="*****"
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <button className="login-btn" type="submit">
-              Entrar
-            </button>
-
-            <button
-              type="button"
-              className="admin-btn"
-              onClick={() => navigate("/admin-login")}
-            >
-              Admin
-            </button>
+      <div className="container">
+        <div className="login-box">
+          <div
+            style={{
+              cursor: "pointer",
+              marginBottom: "10px",
+              textAlign: "left",
+            }}
+            onClick={() => navigate("/")}
+          >
+            ← Sair
           </div>
-        </div>
-      </form>
 
-      {loading && <Carregando mensagem="Acessando o site..." />}
+          <h1>Entrar</h1>
+          <p className="subtitle">Acesse sua conta</p>
+
+          <div className="user-type">
+            <span>Tipo de Usuário</span>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <BotaoLogin
+                tipoBotao={"admin"}
+                aoClicar={() => setTipoUsuario("admin")}
+                ativo={tipoUsuario === "admin"}
+              >
+                <i className="fa-solid fa-user"></i>
+                ADM
+              </BotaoLogin>
+            </div>
+          </div>
+
+          <div className="input-group">
+            <label>E-mail</label>
+
+            <div className="input-icon">
+              <i className="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                placeholder="adm@agende.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="input-group">
+            <label>Senha</label>
+
+            <div className="input-icon">
+              <i className="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                placeholder="*****"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <button className="login-btn" onClick={handleSubmit}>
+            Entrar
+          </button>
+        </div>
+      </div>
+
+      {loading && <Carregando mensagem="Acessando painel administrativo..." />}
     </div>
   );
 }
 
-export default Login;
+export default AdminLogin;
