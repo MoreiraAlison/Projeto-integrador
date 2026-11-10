@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-
 import BotaoLogin from "../componentes/BotaoLogin";
 
 import logo from "../assets/logo-login.png";
 import Carregando from "../componentes/Carregando";
-
 import usuarioAPI from "../api/usuario";
 import { useAutenticador } from "../context/AutenticadorContexto";
 
@@ -23,17 +21,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !senha) {
-      alert("Preencha o e-mail e a senha.");
-      return;
-    }
-
     try {
       const usuarioLogado = await usuarioAPI.login({
         email,
         senha,
       });
 
+      // Tipo escolhido na tela
       const tiposPermitidos = {
         aluno: "Aluno",
         responsavel: "Responsável",
@@ -41,15 +35,20 @@ function Login() {
       };
 
       const tipoSelecionado = tiposPermitidos[tipoUsuario];
+
+      // Tipo real do usuário vindo do banco
       const tipoBanco = usuarioLogado?.tipo_usuario?.tipo;
 
+      // Verifica se o tipo selecionado corresponde ao usuário
       if (tipoBanco !== tipoSelecionado) {
         alert(
           `Este e-mail pertence a um usuário do tipo "${tipoBanco}". Selecione a opção correta para entrar.`
         );
+
         return;
       }
 
+      // Só faz login se o tipo estiver correto
       login(usuarioLogado);
 
       setLoading(true);
@@ -62,108 +61,123 @@ function Login() {
     }
   };
 
-  const abrirLoginAdministrador = () => {
+  const abrirLoginAdmin = () => {
     navigate("/admin-login");
   };
 
   return (
-    <>
-      {loading && <Carregando />}
+    <div className="login-container">
+      <div className="top-logo">
+        <img
+          src={logo}
+          alt="Logo Marista"
+          width={"306px"}
+          height={"107px"}
+        />
+      </div>
 
-      <div className="login-container">
-        <div className="login-card">
-          <img
-            src={logo}
-            alt="Agende+"
-            className="login-logo"
-          />
+      <div className="purple-circle"></div>
+      <div className="green-circle"></div>
+      <div className="red-shape"></div>
+      <div className="yellow-star"></div>
 
-          <h2>Login</h2>
+      <form id="formLogin" onSubmit={handleSubmit}>
+        <div className="container">
+          <div className="login-box">
+            <h1>Entrar</h1>
+            <p className="subtitle">Acesse sua conta</p>
 
-          <div className="tipo-usuario">
+            <div className="user-type">
+              <span>Tipo de Usuário</span>
+
+              <div className="buttons">
+                <BotaoLogin
+                  tipoBotao={"aluno"}
+                  aoClicar={() => setTipoUsuario("aluno")}
+                  ativo={tipoUsuario === "aluno"}
+                >
+                  <i className="fa-solid fa-user"></i>
+                  Aluno
+                </BotaoLogin>
+
+                <BotaoLogin
+                  tipoBotao={"responsavel"}
+                  aoClicar={() => setTipoUsuario("responsavel")}
+                  ativo={tipoUsuario === "responsavel"}
+                >
+                  <i className="fa-solid fa-users"></i>
+                  Responsável
+                </BotaoLogin>
+
+                <BotaoLogin
+                  tipoBotao={"profissional"}
+                  aoClicar={() => setTipoUsuario("profissional")}
+                  ativo={tipoUsuario === "profissional"}
+                >
+                  <i className="fa-solid fa-briefcase"></i>
+                  Profissional
+                </BotaoLogin>
+              </div>
+            </div>
+
+            <div className="input-group">
+              <label>E-mail</label>
+
+              <div className="input-icon">
+                <i className="fa-solid fa-envelope"></i>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="aluno@agende.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <label>Senha</label>
+
+              <div className="input-icon">
+                <i className="fa-solid fa-lock"></i>
+
+                <input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  placeholder="*****"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
             <button
-              type="button"
-              className={`tipo-btn ${
-                tipoUsuario === "aluno" ? "ativo aluno" : ""
-              }`}
-              onClick={() => setTipoUsuario("aluno")}
+              className="login-btn"
+              type="submit"
             >
-              Aluno
+              Entrar
             </button>
 
             <button
               type="button"
-              className={`tipo-btn ${
-                tipoUsuario === "responsavel"
-                  ? "ativo responsavel"
-                  : ""
-              }`}
-              onClick={() =>
-                setTipoUsuario("responsavel")
-              }
+              className="admin-btn"
+              onClick={abrirLoginAdmin}
             >
-              Responsável
-            </button>
-
-            <button
-              type="button"
-              className={`tipo-btn ${
-                tipoUsuario === "profissional"
-                  ? "ativo profissional"
-                  : ""
-              }`}
-              onClick={() =>
-                setTipoUsuario("profissional")
-              }
-            >
-              Profissional
+              Admin
             </button>
           </div>
-
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="email">E-mail</label>
-
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
-                placeholder="Digite seu e-mail"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="senha">Senha</label>
-
-              <input
-                id="senha"
-                type="password"
-                value={senha}
-                onChange={(e) =>
-                  setSenha(e.target.value)
-                }
-                placeholder="Digite sua senha"
-              />
-            </div>
-
-            <BotaoLogin type="submit">
-              Entrar
-            </BotaoLogin>
-          </form>
-
-          <button
-            type="button"
-            className="botao-adm"
-            onClick={abrirLoginAdministrador}
-          >
-            ADM
-          </button>
         </div>
-      </div>
-    </>
+      </form>
+
+      {loading && (
+        <Carregando mensagem="Acessando o site..." />
+      )}
+    </div>
   );
 }
 
