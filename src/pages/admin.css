@@ -1,3 +1,4 @@
+```css
 .admin-page {
   min-height: 100vh;
   background: #f1f1f1;
@@ -15,11 +16,9 @@
   background: #012c58;
   color: white;
   height: 90px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 30px;
 }
 
@@ -58,11 +57,8 @@
 .admin-container {
   margin: 25px;
   padding: 30px;
-
   background: #ececec;
-
   border-radius: 25px;
-
   min-height: calc(100vh - 180px);
 }
 
@@ -88,16 +84,11 @@
 .btn-adicionar {
   background: #56c0f3;
   color: white;
-
   border: none;
   border-radius: 25px;
-
   padding: 12px 20px;
-
   font-size: 14px;
-
   cursor: pointer;
-
   display: flex;
   align-items: center;
   gap: 10px;
@@ -107,15 +98,10 @@
 
 .busca {
   margin-top: 30px;
-
   width: 60%;
-
   background: #e9e1ec;
-
   border-radius: 20px;
-
   padding: 12px;
-
   display: flex;
   align-items: center;
   gap: 15px;
@@ -137,7 +123,6 @@
 
 .lista-usuarios {
   margin-top: 30px;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -145,15 +130,11 @@
 
 .usuario-card {
   background: white;
-
   border-radius: 20px;
-
   padding: 15px 25px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
@@ -181,8 +162,6 @@
   align-items: center;
   gap: 20px;
 }
-
-
 
 /* .aluno {
   background: #8196ff;
@@ -221,6 +200,155 @@
   color: #555;
 }
 
-/*.profissional {
+.profissional {
   background: #133B64;
 }
+
+/* ============================= */
+/* MODAL DO ADM                  */
+/* ============================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  z-index: 9999;
+}
+
+.modal-container {
+  width: 420px;
+  max-width: calc(100vw - 40px);
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+  position: relative;
+  z-index: 10000;
+}
+
+.modal-container h2 {
+  margin: 0 0 25px;
+
+  color: #173f6c;
+
+  font-size: 30px;
+
+  font-family: Georgia, serif;
+
+  text-align: center;
+}
+
+/* CAMPOS DO MODAL */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #173f6c;
+
+  font-size: 16px;
+
+  font-weight: bold;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  height: 50px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #ddd;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  color: #222;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #56c0f3;
+}
+
+/* BOTÕES DO MODAL */
+
+.modal-botoes {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 25px;
+}
+
+.modal-botoes button {
+  border: none;
+
+  border-radius: 25px;
+
+  padding: 12px 28px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.modal-botoes .cancelar {
+  background: #eeeeee;
+
+  color: #333333;
+}
+
+.modal-botoes .cancelar:hover {
+  background: #dddddd;
+}
+
+.modal-botoes .confirmar {
+  background: #56c0f3;
+
+  color: white;
+}
+
+.modal-botoes .confirmar:hover {
+  background: #45b8eb;
+}
+```
