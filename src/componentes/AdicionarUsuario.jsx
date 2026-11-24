@@ -1,7 +1,11 @@
+```jsx
 import { useState } from "react";
-import "./usuario.css";
 
-export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
+export default function AdicionarUsuario({
+  aberto,
+  fechar,
+  adicionarUsuario
+}) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -26,7 +30,7 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
       email,
       senha,
       tipo,
-      funcao: tipo === "Profissional" ? cargo.trim() : null,
+      funcao: tipo === "Profissional" ? cargo.trim() : null
     });
 
     setNome("");
@@ -55,6 +59,7 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
 
         <div className="campo">
           <label>Nome</label>
+
           <input
             type="text"
             value={nome}
@@ -64,6 +69,7 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
 
         <div className="campo">
           <label>E-mail</label>
+
           <input
             type="email"
             value={email}
@@ -73,6 +79,7 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
 
         <div className="campo">
           <label>Senha</label>
+
           <input
             type="password"
             value={senha}
@@ -83,7 +90,10 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
         <div className="campo">
           <label>Tipo de Usuário</label>
 
-          <select value={tipo} onChange={handleTipoChange}>
+          <select
+            value={tipo}
+            onChange={handleTipoChange}
+          >
             <option value="Aluno">Aluno</option>
             <option value="Responsável">Responsável</option>
             <option value="Profissional">Profissional</option>
@@ -104,11 +114,17 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
         )}
 
         <div className="modal-botoes">
-          <button className="cancelar" onClick={fechar}>
+          <button
+            className="cancelar"
+            onClick={fechar}
+          >
             Cancelar
           </button>
 
-          <button className="confirmar" onClick={handleSubmit}>
+          <button
+            className="confirmar"
+            onClick={handleSubmit}
+          >
             Confirmar
           </button>
         </div>
@@ -116,3 +132,4 @@ export default function AdicionarUsuario({ aberto, fechar, adicionarUsuario }) {
     </div>
   );
 }
+```
