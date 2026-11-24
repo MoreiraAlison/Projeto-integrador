@@ -1,11 +1,11 @@
+```jsx
 import { useState, useEffect } from "react";
-import "./usuario.css";
 
 export default function EditarUsuario({
   aberto,
   fechar,
   usuario,
-  salvarUsuario,
+  salvarUsuario
 }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +18,10 @@ export default function EditarUsuario({
     setNome(usuario.nome || "");
     setEmail(usuario.email || "");
 
-    const tipoUsuario = usuario.tipo_usuario?.tipo || usuario.tipo || "";
+    const tipoUsuario =
+      usuario.tipo_usuario?.tipo ||
+      usuario.tipo ||
+      "";
 
     setTipo(tipoUsuario);
 
@@ -50,7 +53,10 @@ export default function EditarUsuario({
       return;
     }
 
-    if (tipo === "Profissional" && !cargo.trim()) {
+    if (
+      tipo === "Profissional" &&
+      !cargo.trim()
+    ) {
       alert("Informe a função do profissional!");
       return;
     }
@@ -60,7 +66,10 @@ export default function EditarUsuario({
       nome: nome.trim(),
       email: email.trim(),
       tipo: tipo,
-      funcao: tipo === "Profissional" ? cargo.trim() : null,
+      funcao:
+        tipo === "Profissional"
+          ? cargo.trim()
+          : null
     };
 
     try {
@@ -98,11 +107,12 @@ export default function EditarUsuario({
         <div className="campo">
           <label>Tipo</label>
 
-          <select value={tipo} onChange={handleTipoChange}>
+          <select
+            value={tipo}
+            onChange={handleTipoChange}
+          >
             <option value="Aluno">Aluno</option>
-
             <option value="Responsável">Responsável</option>
-
             <option value="Profissional">Profissional</option>
           </select>
         </div>
@@ -121,11 +131,17 @@ export default function EditarUsuario({
         )}
 
         <div className="modal-botoes">
-          <button className="cancelar" onClick={fechar}>
+          <button
+            className="cancelar"
+            onClick={fechar}
+          >
             Cancelar
           </button>
 
-          <button className="confirmar" onClick={handleSalvar}>
+          <button
+            className="confirmar"
+            onClick={handleSalvar}
+          >
             Salvar
           </button>
         </div>
@@ -133,3 +149,4 @@ export default function EditarUsuario({
     </div>
   );
 }
+```
