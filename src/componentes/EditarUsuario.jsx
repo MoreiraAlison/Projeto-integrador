@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../paginas/admin.css";
+import { createPortal } from "react-dom";
 
 export default function EditarUsuario({
   aberto,
@@ -24,7 +24,6 @@ export default function EditarUsuario({
       "";
 
     setTipo(tipoUsuario);
-
     setCargo(usuario.funcao || "");
   }, [usuario]);
 
@@ -53,10 +52,7 @@ export default function EditarUsuario({
       return;
     }
 
-    if (
-      tipo === "Profissional" &&
-      !cargo.trim()
-    ) {
+    if (tipo === "Profissional" && !cargo.trim()) {
       alert("Informe a função do profissional!");
       return;
     }
@@ -65,11 +61,8 @@ export default function EditarUsuario({
       id: usuario.id,
       nome: nome.trim(),
       email: email.trim(),
-      tipo: tipo,
-      funcao:
-        tipo === "Profissional"
-          ? cargo.trim()
-          : null
+      tipo,
+      funcao: tipo === "Profissional" ? cargo.trim() : null
     };
 
     try {
@@ -79,7 +72,7 @@ export default function EditarUsuario({
     }
   };
 
-  return (
+  return createPortal(
     <div className="modal-overlay">
       <div className="modal-container">
         <h2>Editar Usuário</h2>
@@ -146,6 +139,7 @@ export default function EditarUsuario({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
