@@ -1,5 +1,5 @@
-```jsx
 import { useState, useEffect } from "react";
+import "../paginas/admin.css";
 
 export default function EditarUsuario({
   aberto,
@@ -149,4 +149,3 @@ export default function EditarUsuario({
     </div>
   );
 }
-```
