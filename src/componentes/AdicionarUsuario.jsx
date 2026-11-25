@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../paginas/admin.css";
+import { createPortal } from "react-dom";
 
 export default function AdicionarUsuario({
   aberto,
@@ -15,7 +15,7 @@ export default function AdicionarUsuario({
   if (!aberto) return null;
 
   const handleSubmit = () => {
-    if (!nome || !email || !senha) {
+    if (!nome.trim() || !email.trim() || !senha.trim()) {
       alert("Preencha todos os campos!");
       return;
     }
@@ -26,8 +26,8 @@ export default function AdicionarUsuario({
     }
 
     adicionarUsuario({
-      nome,
-      email,
+      nome: nome.trim(),
+      email: email.trim(),
       senha,
       tipo,
       funcao: tipo === "Profissional" ? cargo.trim() : null
@@ -52,7 +52,7 @@ export default function AdicionarUsuario({
     }
   };
 
-  return (
+  return createPortal(
     <div className="modal-overlay">
       <div className="modal-container">
         <h2>Adicionar Usuário</h2>
@@ -129,6 +129,7 @@ export default function AdicionarUsuario({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
