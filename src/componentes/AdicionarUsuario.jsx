@@ -1,5 +1,5 @@
-```jsx
 import { useState } from "react";
+import "../paginas/admin.css";
 
 export default function AdicionarUsuario({
   aberto,
@@ -132,4 +132,3 @@ export default function AdicionarUsuario({
     </div>
   );
 }
-```
